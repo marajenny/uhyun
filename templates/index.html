@@ -22,7 +22,6 @@
     <style>
         * {
             font-family: 'Pretendard Variable';
-            font-display: swap;
         }
 
 
@@ -102,14 +101,14 @@
             let track = $('#track').val()
             let date = $('#date_input').val()
             let hour = $('#hour_input').val()
-            let count = len()
             $.ajax({
                 type: 'POST',
                 url: '/playlist',
-                data: {track_input: track, date_input: date, hour_input: hour, count_input: count},
+                data: {track_input: track, date_input: date, hour_input: hour},
                 success: function (response) {
                     alert(response['msg'])
                     window.location.reload()
+
                 }
             });
         }

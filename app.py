@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, render_template, request, jsonify
 
+
 app = Flask(__name__)
 
 from pymongo import MongoClient
@@ -19,14 +20,11 @@ secret = 'ddbca51759f340e58471ec1b929bad7b'
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-
+from datetime import datetime
 
 @app.route('/')
 def home():
     return render_template('index.html')
-
-
-
 
 
 @app.route("/playlist", methods=["GET"])
@@ -35,32 +33,29 @@ def playlist_get():
     return jsonify({'playlist': playlist_list})
 
 
-
 @app.route("/playlist", methods=["POST"])
 def search_track():
     track_input_receive = request.form.get('track_input')
 
-    track_count = db.playlist.find_one({"track": track_input_receive})
+    count = db.playlist.count({"track": track_input_receive, "hour": hour_input})
 
-    if track_count:
-        db.playlist.update_one({"_id": track_count["_id"]}, {"$inc": {"count": 1}})
-        message = f"'{track_input_receive}'은 이미 모아졌어요."
+    if len(count) > 0 :
+        db.playlist.update_one({"count": len(count)}, {"$inc": {"count": 1}})
+
     else:
         db.playlist.insert_one({"track": track_input_receive, "count": 1})
-        message = f"'{track_input_receive}'가 모아졌어요!"
 
-    return message
 
 def playlist_post():
     track_input_receive = request.form['track_input']
-    date = request.form['date_input']
+    date_input = request.form['date_input']
     likes = request.form['like']
-
 
     track_results = []
     artists_results = []
+    image_results = []
 
-    track_search = sp.search(track_input_receive, limit=10, type='track', market=None)
+    track_search = sp.search(track_input_receive, limit=20, type='track', market=None)
 
     for track in track_search['tracks']['items']:
 
@@ -68,25 +63,29 @@ def playlist_post():
             artists_result = artist['name']
             artists_results.append(artists_result)
 
+        for image in track['images']:
+            image_result = image[0]['url']
+            image_results.append(image_result)
+
         track_result = track['name']
         track_results.append(track_result)
 
-
-    return jsonify({'msg': '비빔밥에 추가되었어요'})
+        now = datetime.now()
+        date_input = now.Date()
+        hour_input = now.hour()
 
 
     doc = {
         'track': track_results,
         'artists': artists_results,
-        'image': image,
-        'date': date,
+        'image': image_results,
+        'date': date_input,
+        'hour': hour_input,
         'likes': likes,
-        'count': count
+        'count': count,
 
     }
     db.playlist.insert_one(doc)
-
-
 
 
 if __name__ == '__main__':
