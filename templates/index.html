@@ -107,7 +107,7 @@
             })
         }
 
-        function posting() {
+        function add_to_playlists() {
             let track = $('#track').val()
             let date = $('#date').val()
             let count = $('#count').val()
@@ -142,8 +142,24 @@
                aria-label="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
                aria-describedby="노래 제목을 검색한 뒤 검색 버튼을 눌러주세요">
 
-        <button class="btn btn-dark" onclick="posting()" type="button" id="search_button">
+        <button class="btn btn-dark" onclick="add_to_playlists()" type="button" id="search_button">
             <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
+                <script>
+        document.getElementById("search_button").addEventListener("click", function clock() {
+            var today = new Date();
+
+            var year = today.getFullYear();
+            var month = ('0' + (today.getMonth() + 1)).slice(-2);
+            var day = ('0' + today.getDate()).slice(-2);
+            var hours = ('0' + today.getHours()).slice(-2);
+            var minutes = ('0' + today.getMinutes()).slice(-2);
+            var seconds = ('0' + today.getSeconds()).slice(-2);
+
+            var dateString = year + '-' + month + '-' + day + hours + ':' + minutes  + ':' + seconds;
+
+            console.log(dateString);
+        });
+    </script>
 
         </button>
 
