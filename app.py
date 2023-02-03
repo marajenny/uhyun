@@ -20,6 +20,7 @@ client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secr
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -33,16 +34,33 @@ def playlist_get():
     playlist_list = list(db.playlist.find({}, {'_id': False}))
     return jsonify({'playlist': playlist_list})
 
+
+
 @app.route("/playlist", methods=["POST"])
+def search_track():
+    track_input_receive = request.form.get('track_input')
+
+    track_count = db.playlist.find_one({"track": track_input_receive})
+
+    if track_count:
+        db.playlist.update_one({"_id": track_count["_id"]}, {"$inc": {"count": 1}})
+        message = f"'{track_input_receive}'은 이미 모아졌어요."
+    else:
+        db.playlist.insert_one({"track": track_input_receive, "count": 1})
+        message = f"'{track_input_receive}'가 모아졌어요!"
+
+    return message
+
 def playlist_post():
     track_input_receive = request.form['track_input']
     date = request.form['date_input']
-
     likes = request.form['like']
 
 
     track_results = []
     artists_results = []
+
+    track_search = sp.search(track_input_receive, limit=10, type='track', market=None)
 
     for track in track_search['tracks']['items']:
 
@@ -68,7 +86,7 @@ def playlist_post():
     }
     db.playlist.insert_one(doc)
 
-    track_search = sp.search(track_input_receive, limit=10, type='track', market=None)
+
 
 
 if __name__ == '__main__':
