@@ -28,7 +28,7 @@ def home():
 
 
 
-@app.route("/Bibimbap", methods=["GET"])
+@app.route("/playlist", methods=["GET"])
 def playlist_get():
     playlist_list = list(db.playlist.find({}, {'_id': False}))
     return jsonify({'playlist': playlist_list})
