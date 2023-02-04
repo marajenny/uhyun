@@ -54,21 +54,28 @@
             text-align: center;
 
         }
-        
-        
+
+        .track_result_container {
+            display: flex;
+            width: 100%;
+
+            box-sizing: border-box;
+        }
+
         .carousel slide {
             height: 700px;
             width: 30%
         }
 
         .carousel-inner {
+            flex: 1;
             width: 100%;
             height: 700px;
             margin-top: 750px;
             text-align: left;
         }
 
-        .carousel-item > button{
+        .carousel-item > button {
             width: 100%;
             height: 100%;
             position: center;
@@ -79,62 +86,62 @@
 
     </style>
 
-   <!--<script>
-        $(document).ready(function () {
-            listing();
-        });
+    <!--<script>
+         $(document).ready(function () {
+             listing();
+         });
 
-        function listing() {
-            $('#cards-box').empty()
-            $.ajax({
-                type: 'GET',
-                url: '/playlist',
-                data: {},
-                success: function (response) {
-                    let rows = response['playlist']
-                    for (let i = 0; i < rows.length; i++) {
-                        let image = rows[i]['image']
-                        let track = rows[i]['track']
-                        let artists = rows[i]['artists']
-                        let count = rows[i]['count']
-                        let likes = rows[i]['likes']
-
-
-                        let temp_html = ` <div class="col">
-                                            <div class="card">
-                                             <img src="${image}" class="card-img-top">
-                                              <div class="card-body">
-                                               <h5 class="card-title">"${track}"</h5>
-                                               <p class="card-text">${artists}</p>
-                                                 <p>${likes}</p>
-                                                <p>${count}</p>
-                                            </div>
-                                         </div>
-                                         </div>`
-                        $('#cards-box').append(temp_html)
-                    }
-                }
-            })
-        }
-
-        function add_to_playlists() {
-            let track = $('#track_selected').val()
-            let date = $('#date_selected').val()
-            let hour = $('#hour_selected').val()
-            $.ajax({
-                type: 'POST',
-                url: '/playlist',
-                data: {track_selected: track, date_selected: date, hour_selected: hour},
-                success: function (response) {
-                    alert(response['비빔밥'])
+         function listing() {
+             $('#cards-box').empty()
+             $.ajax({
+                 type: 'GET',
+                 url: '/playlist',
+                 data: {},
+                 success: function (response) {
+                     let rows = response['playlist']
+                     for (let i = 0; i < rows.length; i++) {
+                         let image = rows[i]['image']
+                         let track = rows[i]['track']
+                         let artists = rows[i]['artists']
+                         let count = rows[i]['count']
+                         let likes = rows[i]['likes']
 
 
-                }
-            });
-        }
+                         let temp_html = ` <div class="col">
+                                             <div class="card">
+                                              <img src="${image}" class="card-img-top">
+                                               <div class="card-body">
+                                                <h5 class="card-title">"${track}"</h5>
+                                                <p class="card-text">${artists}</p>
+                                                  <p>${likes}</p>
+                                                 <p>${count}</p>
+                                             </div>
+                                          </div>
+                                          </div>`
+                         $('#cards-box').append(temp_html)
+                     }
+                 }
+             })
+         }
+
+         function add_to_playlists() {
+             let track = $('#track_selected').val()
+             let date = $('#date_selected').val()
+             let hour = $('#hour_selected').val()
+             $.ajax({
+                 type: 'POST',
+                 url: '/playlist',
+                 data: {track_selected: track, date_selected: date, hour_selected: hour},
+                 success: function (response) {
+                     alert(response['비빔밥'])
 
 
-    </script>-->
+                 }
+             });
+         }
+
+
+     </script>-->
 
 </head>
 <body>
@@ -157,37 +164,33 @@
             <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
         </button>
 
-        <script>
-            document.getElementById("search_button").addEventListener("click", function () {
-                var date_input = new Date();
-                var hour_input = date_input.getHours();
+        <!--  <script>
+              document.getElementById("search_button").addEventListener("click", function () {
+                  var date_input = new Date();
+                  var hour_input = date_input.getHours();
 
-            });
-        </script>
+              });
+          </script>-->
 
 
     </div>
-    <div class="container-fluid">
-        <div class="row row-cols-1 row-cols-md-2 g-3" id="cards-box">
-
-        </div>
-    </div>
-
 
 
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="position-absolute top-50 start-50 translate-middle">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active"
                         aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
                         aria-label="Slide 2"></button>
             </div>
-            <div class="track_result_container">
+            <div class="container-fluid">
+
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row row-cols-1 row-cols-md-5 g-1">
-                            <div class="col">
+                            <div class="col-sd-4">
                                 <div class="card h-100">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
@@ -201,8 +204,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="card h-100">
+                            <div class="col-sd-4">
+                                <div class="card">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -215,8 +218,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="card h-100">
+                            <div class="col-sd-4">
+                                <div class="card">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -229,8 +232,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="card h-100">
+                            <div class="col-sd-4">
+                                <div class="card">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -243,8 +246,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="card h-100">
+                            <div class="col-sd-4">
+                                <div class="card">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -259,9 +262,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item active">
+                    <div class="carousel-item">
                         <div class="row row-cols-1 row-cols-md-5 g-1">
-                            <div class="col">
+                            <div class="col-sd-4">
                                 <div class="card h-100">
                                     <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
                                          class="card-img-top"
@@ -275,7 +278,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sd-4">
                                 <div class="card h-100">
                                     <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
                                          class="card-img-top"
@@ -289,7 +292,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sd-4">
                                 <div class="card h-100">
                                     <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
                                          class="card-img-top"
@@ -303,7 +306,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sd-4">
                                 <div class="card h-100">
                                     <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
                                          class="card-img-top"
@@ -317,7 +320,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-sd-4">
                                 <div class="card h-100">
                                     <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
                                          class="card-img-top"
@@ -334,20 +337,21 @@
                         </div>
                     </div>
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+
     </div>
 
-</div>
+
 </body>
 </html>
