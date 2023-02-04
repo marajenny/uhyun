@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Document</title>
+  <style>
+    * {
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+      padding: 0;
+      margin: 0;
+      }
+
+    .album_card {
+      width: 276px;
+      height: 276px;
+      background-color: aqua;
+      border-radius: 9px;
+      margin: 30px;
+    }
+
+    .album_card .album_info{
+      padding: 15px;
+    }
+
+    .album_card .song_title{
+      font-weight: 900;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .album_card .current_listener{
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .album_card .album_footer{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+    }
+
+    .album_card .album_footer .artist{
+      font-weight: 500;
+      font-size: 14px;
+      opacity: 60%;
+      width: 60%;
+    }
+    .album_card .album_footer .button_like{
+      font-weight: 900;
+      font-size: 18px;
+      background: none;
+      border: 1px solid #000;
+    }
+
+    .popup{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      height: 100vh;
+    }
+
+    .popup .contents{
+      width: 433px;
+      height: 419px;
+      border-radius: 28px;
+      background-color: #fff;
+      padding: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="album_card">
+    <div class="album_image">
+      <img src="" alt=""/>
+    </div>
+    <div class="album_info">
+      <p class="song_title">OMG</p>
+      <p class="current_listener">1명의 사람들이 듣고 있어요</p>
+      <div class="album_footer">
+        <p class="artist">NewJeans</p>
+        <button class="button_like">999</button>
+        <a href="">이동</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="album_card">
+    <div class="album_image">
+      <img src="" alt=""/>
+    </div>
+    <div class="album_info">
+      <p class="song_title">OMG</p>
+
+      <div class="album_footer">
+        <p class="artist">NewJeans</p>
+        <button class="button_popup">팝업</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup">
+    <div class="contents">
+      <button class="button_close">닫기</button>
+      <p>Playlist 비빔밥에 노래가 담겼어요.</p>
+    </div>
+  </div>
+
+  <script>
+    const button_like = $('.album_card .album_info .button_like')
+    let count = parseInt(button_like.text())
+    button_like.on('click', function(){
+      count += 1
+      button_like.text(count)
+    })
+
+    $('.popup').hide()
+    $('.album_card .button_popup').on('click', function(){
+      $('.popup').show()
+    })
+
+    $('.popup .button_close').on('click', function(){
+      $('.popup').hide()
+    })
+  </script>
+</body>
+</html>
