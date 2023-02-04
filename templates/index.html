@@ -25,7 +25,6 @@
         }
 
 
-        /*추후 수정 예정인 부분입니다*/
         .cover {
             color: goldenrod;
             width: 100%;
@@ -98,7 +97,7 @@
         }
 
         function add_to_playlists() {
-            let track = $('#track').val()
+            let track = $('#track_input').val()
             let date = $('#date_input').val()
             let hour = $('#hour_input').val()
             $.ajax({
@@ -106,8 +105,8 @@
                 url: '/playlist',
                 data: {track_input: track, date_input: date, hour_input: hour},
                 success: function (response) {
-                    alert(response['msg'])
-                    window.location.reload()
+                    alert(response['비빔밥'])
+
 
                 }
             });
