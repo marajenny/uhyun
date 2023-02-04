@@ -1,0 +1,66 @@
+        * {
+            font-family: 'Pretendard Variable';
+        }
+
+
+        /*추후 수정 예정인 부분입니다*/
+        .cover {
+            color: goldenrod;
+            width: 100%;
+            height: 800px;
+
+            background-color: #fcc221;
+            background-size: cover;
+            background-position: center;
+
+            color: black;
+
+
+            display: flex;
+            flex-direction: column;
+            position: relative;
+
+
+        }
+
+        .cover_bibimbap {
+            margin: 10px;
+            text-align: left;
+        }
+
+        .cover_title {
+            margin-top: 25px;
+            text-align: center;
+
+        }
+/*spotify 상위 10개 노래 목록*/
+        .carousel slide {
+            height: 700px;
+            width: 30%
+        }
+
+        .carousel-inner {
+            width: 100%;
+            height: 700px;
+            margin: 750px auto 0px auto;
+            text-align: left;
+        }
+/*스푼 버튼*/
+        .carousel-item > button{
+            width: 100%;
+            height: 100%;
+            position: center;
+            border-radius: 50px;
+            border: 1px solid white;
+        }
+/*페이지 화살표*/
+        .carousel-control-prev {
+            margin-top: 150px;
+            margin-left: 180px
+        }
+
+        .carousel-control-next {
+            margin-top: 150px;
+            margin-right: 180px
+
+        }
