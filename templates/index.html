@@ -79,7 +79,7 @@
 
     </style>
 
-    <script>
+   <!--<script>
         $(document).ready(function () {
             listing();
         });
@@ -118,13 +118,13 @@
         }
 
         function add_to_playlists() {
-            let track = $('#track_input').val()
-            let date = $('#date_input').val()
-            let hour = $('#hour_input').val()
+            let track = $('#track_selected').val()
+            let date = $('#date_selected').val()
+            let hour = $('#hour_selected').val()
             $.ajax({
                 type: 'POST',
                 url: '/playlist',
-                data: {track_input: track, date_input: date, hour_input: hour},
+                data: {track_selected: track, date_selected: date, hour_selected: hour},
                 success: function (response) {
                     alert(response['비빔밥'])
 
@@ -134,7 +134,7 @@
         }
 
 
-    </script>
+    </script>-->
 
 </head>
 <body>
