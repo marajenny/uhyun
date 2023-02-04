@@ -35,7 +35,7 @@ def playlist_get():
 
 @app.route("/playlist", methods=["POST"])
 def spotify_search():
-    track_input_receive = request.form['track_input']
+
 
 
     track_results = []
@@ -64,8 +64,8 @@ def search_track():
     track_input_receive = request.form.get('track_input')
 
     now = datetime.now()
-    date_input = now.Date()
-    hour_input = now.hour()
+    date_input = now.date()
+    hour_input = now.hour
     count = db.playlist.count_documents({"track": track_input_receive, "hour": hour_input})
 
     if count > 0 :
@@ -74,10 +74,11 @@ def search_track():
     else:
         db.playlist.insert_one({"track": track_input_receive, "date": date_input, "hour": hour_input, "count": 1})
 
-    return(playlist_post())
 
 
 def playlist_post():
+
+
     date_input_receive = request.form['date_input']
     hour_input_receive = request.form['hour_input']
     likes = request.form['like']
