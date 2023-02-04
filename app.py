@@ -37,13 +37,16 @@ def playlist_get():
 def search_track():
     track_input_receive = request.form.get('track_input')
 
-    count = db.playlist.count({"track": track_input_receive, "hour": hour_input})
+    now = datetime.now()
+    date_input = now.Date()
+    hour_input = now.hour()
+    count = db.playlist.count_documents({"track": track_input_receive, "hour": hour_input})
 
     if len(count) > 0 :
-        db.playlist.update_one({"count": len(count)}, {"$inc": {"count": 1}})
+        db.playlist.update_one({"track": track_input_receive, "hour": hour_input}, {"$inc": {"count": 1}})
 
     else:
-        db.playlist.insert_one({"track": track_input_receive, "count": 1})
+        db.playlist.insert_one({"track": track_input_receive, "date": date_input, "hour": hour_input, "count": 1})
 
 
 def playlist_post():
@@ -55,7 +58,7 @@ def playlist_post():
     artists_results = []
     image_results = []
 
-    track_search = sp.search(track_input_receive, limit=20, type='track', market=None)
+    track_search = sp.search(track_input_receive, limit=10, type='track', market=None)
 
     for track in track_search['tracks']['items']:
 
@@ -70,9 +73,7 @@ def playlist_post():
         track_result = track['name']
         track_results.append(track_result)
 
-        now = datetime.now()
-        date_input = now.Date()
-        hour_input = now.hour()
+
 
 
     doc = {
