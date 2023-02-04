@@ -34,25 +34,9 @@ def playlist_get():
 
 
 @app.route("/playlist", methods=["POST"])
-def search_track():
-    track_input_receive = request.form.get('track_input')
-
-    now = datetime.now()
-    date_input = now.Date()
-    hour_input = now.hour()
-    count = db.playlist.count_documents({"track": track_input_receive, "hour": hour_input})
-
-    if len(count) > 0 :
-        db.playlist.update_one({"track": track_input_receive, "hour": hour_input}, {"$inc": {"count": 1}})
-
-    else:
-        db.playlist.insert_one({"track": track_input_receive, "date": date_input, "hour": hour_input, "count": 1})
-
-
-def playlist_post():
+def spotify_search():
     track_input_receive = request.form['track_input']
-    date_input = request.form['date_input']
-    likes = request.form['like']
+
 
     track_results = []
     artists_results = []
@@ -76,12 +60,34 @@ def playlist_post():
 
 
 
+def search_track():
+    track_input_receive = request.form.get('track_input')
+
+    now = datetime.now()
+    date_input = now.Date()
+    hour_input = now.hour()
+    count = db.playlist.count_documents({"track": track_input_receive, "hour": hour_input})
+
+    if count > 0 :
+        db.playlist.update_one({"track": track_input_receive, "hour": hour_input}, {"$inc": {"count": 1}})
+
+    else:
+        db.playlist.insert_one({"track": track_input_receive, "date": date_input, "hour": hour_input, "count": 1})
+
+    return(playlist_post())
+
+
+def playlist_post():
+    date_input_receive = request.form['date_input']
+    hour_input_receive = request.form['hour_input']
+    likes = request.form['like']
+
     doc = {
         'track': track_results,
         'artists': artists_results,
         'image': image_results,
-        'date': date_input,
-        'hour': hour_input,
+        'date': date_input_receive,
+        'hour': hour_input_receive,
         'likes': likes,
         'count': count,
 
