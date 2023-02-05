@@ -99,8 +99,21 @@
 
     <!--<script>
          $(document).ready(function () {
-             listing();
+             spotify_search();
          });
+         function spotify_search(){
+             let track_input = $('#track').val()
+
+                $.ajax({
+                    type: "POST",
+                    url: "/search_results",
+                    data: {track_input: track},
+                    success: function (response) {
+                        alert(response["msg"])
+                        window.location.reload()
+                    }
+                });
+            }
 
          function listing() {
              $('#cards-box').empty()
@@ -171,7 +184,7 @@
                aria-label="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
                aria-describedby="노래 제목을 검색한 뒤 검색 버튼을 눌러주세요">
 
-        <button class="btn btn-dark" onclick="add_to_playlists()" type="submit" id="search_button">
+        <button class="btn btn-dark" onclick="spotify_search()" type="submit" id="search_button">
             <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
         </button>
 
@@ -186,7 +199,7 @@
 
     </div>
 
-
+<div class="container">
     <div id="carouselExampleIndicators" class="carousel slide">
         <div class="position-absolute top-50 start-50 translate-middle">
             <div class="carousel-indicators">
@@ -362,7 +375,7 @@
         </div>
 
     </div>
-
+</div>
 
 </body>
 </html>
