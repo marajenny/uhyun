@@ -29,36 +29,31 @@ def home():
 
 
 @app.route("/search_results", methods=["POST"])
-def search_results():
-    track_input_receive = request.form.get('track_input')
-
+def spotify_search():
+    track_input_receive = request.form['track_input']
     track_search = sp.search(track_input_receive, limit=10, type='track', market=None)
 
+
+    tracks = []
+
     for track in track_search['tracks']['items']:
-        for artist in track['artists']:
-            artists_result = artist['name']
-            artists_results.append(artists_result)
+        track_results = track['name']
+        artist_results = [artist['name'] for artist in track['artists']]
+        image_results = next(
+            (image['url'] for image in track['album']['images'] if image['height'] == 640 and image['width'] == 640),
+            None)
+        url_results = track['album']['external_urls']['spotify']
+        track_result = {
+            'track': track_results,
+            'artists': artist_results,
+            'image': image_results,
+            'url': url_results
+        }
+        tracks.append(track_result)
 
-            album = track['album']
-            for image in album['images']:
-                if image['height'] == 640 and image['width'] == 640:
-                    image_result = image['url']
-                    image_results.append(image_result)
-
-            url_result = album['external_urls']['spotify']
-            url_results.append(url_result)
-
-        track_result = track['name']
-        track_results.append(track_result)
-
-    doc = {
-        'track': track_results,
-        'artists': artists_results,
-        'image': image_results,
-        'url' : url_results
-
-    }
-    db.search_results.insert(doc)
+    for track in tracks:
+        doc = {'track': track['track'], 'artists': track['artists'], 'image': track['image'], 'url': track['url']}
+        db.search_results.insert_one(doc)
 
 
 @app.route("/playlists", methods=["POST"])
