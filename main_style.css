@@ -1,0 +1,61 @@
+
+
+/*상단 커버 */
+    * {
+        font-family: 'Pretendard';
+    }
+
+    .cover {
+        color: goldenrod;
+        width: 100%;
+        height: 550px;
+
+        background-color: #fcc221;
+        background-size: cover;
+        background-position: center;
+
+        color: black;
+
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+    }
+
+    .cover_bibimbap {
+        margin: 10px;
+        text-align: left;
+    }
+
+    .cover_title {
+        margin-top: 25px;
+        text-align: center;
+    }
+
+    .track_result_container {
+        display: flex;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .carousel slide {
+        height: 700px;
+        width: 30%
+    }
+
+    .carousel-inner {
+        flex: 1;
+        width: 100%;
+        height: 700px;
+        margin-top: 750px;
+        text-align: left;
+    }
+
+    .carousel-item > button {
+        width: 100%;
+        height: 100%;
+        position: center;
+        border-radius: 50px;
+        border: 1px solid white;
+    }
+

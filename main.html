@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+          crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" type="text/css"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>
+
+  <script src="https://kit.fontawesome.com/b1c5ccd7ac.js" crossorigin="anonymous"></script>
+
+  <!--스타일 시트 연결-->
+  <link rel="stylesheet" href="main_style.css">
+
+  <title>Playlist Bibimbap</title>
+</head>
+
+
+<body>
+  <!-- 상단 커버(심소연님) -->
+  <div class="cover">
+    <div class="cover_bibimbap">
+      <b>Playlist Bibimbap</b>
+    </div>
+
+    <div class="cover_title">
+      <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
+
+    </div>
+
+    <div class="input-group mb-3" style="width: 60%; align-self: center; margin-top: 20px;">
+      <input id="track_input" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
+             aria-label="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
+             aria-describedby="노래 제목을 검색한 뒤 검색 버튼을 눌러주세요">
+
+      <button class="btn btn-dark" onclick="add_to_playlists()" type="submit" id="search_button">
+        <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
+      </button>
+    </div>
+
+    <!-- 슬라이드(박드림님)-->
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="position-absolute top-50 start-50 translate-middle">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+            </div>
+            <div class="container-fluid">
+
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row row-cols-1 row-cols-md-5 g-1">
+                            <div class="col-sd-4">
+                                <div class="card h-100">
+                                    <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_1</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_1</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card">
+                                    <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_2</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_2</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card">
+                                    <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_3</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_3</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card">
+                                    <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_4</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_4</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card">
+                                    <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_5</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_5</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row row-cols-1 row-cols-md-5 g-1">
+                            <div class="col-sd-4">
+                                <div class="card h-100">
+                                    <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_6</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_6</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card h-100">
+                                    <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_7</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_7</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card h-100">
+                                    <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_8</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_8</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card h-100">
+                                    <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_9</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_9</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sd-4">
+                                <div class="card h-100">
+                                    <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
+                                         class="card-img-top"
+                                         alt="이미지를 준비 중입니다">
+                                    <div class="card-body">
+                                        <h5 class="card-title">track_results_10</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light">🥄</button>
+                                        </div>
+                                        <p class="card-text">artist_results_10</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+</html>
