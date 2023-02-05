@@ -123,8 +123,8 @@
             flex: 1;
             width: 100%;
             height: 100%;
-            position: relative ;
-            top:-120px;
+            position: relative;
+            top: -120px;
             text-align: left;
         }
 
@@ -167,6 +167,23 @@
             document.getElementById('carouselExampleIndicators').style.display = 'block';
         }
     </script>
+
+    <script>
+        var audio = document.getElementById("play");
+        var playing = false;
+
+        function preview_play(audio) {
+            if (playing) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            playing = !playing;
+        }
+
+    </script>
+
+
     <!--<script>
         $(document).ready(function () {
             spotify_search();
@@ -188,38 +205,42 @@
             carouselExampleIndicators.style.display = 'flex';
         }
 
-        function listing() {
-            $('#cards-box').empty()
-            $.ajax({
-                type: 'GET',
-                url: '/playlist',
-                data: {},
-                success: function (response) {
-                    let rows = response['playlist']
-                    for (let i = 0; i < rows.length; i++) {
-                        let image = rows[i]['image']
-                        let track = rows[i]['track']
-                        let artists = rows[i]['artists']
-                        let count = rows[i]['count']
-                        let likes = rows[i]['likes']
-
-
-                        let temp_html = ` <div class="col">
-                                             <div class="card">
-                                              <img src="${image}" class="card-img-top">
-                                               <div class="card-body">
-                                                <h5 class="card-title">"${track}"</h5>
-                                                <p class="card-text">${artists}</p>
-                                                  <p>${likes}</p>
-                                                 <p>${count}</p>
-                                             </div>
-                                          </div>
-                                          </div>`
-                        $('#cards-box').append(temp_html)
-                    }
-                }
-            })
-        }
+            function getTracks() {
+        $.ajax({
+            type: "GET",
+            url: "/search_results",
+            data: {},
+            success: function (response) {
+                let tracks = response.track;
+                let tracksList = $("#tracks-list");
+                tracksList.empty();
+                tracks.forEach(function (track) {
+                    tracksList.append(`
+                       <div class="col-sd-4">
+                                <div class="card" style="height: 85%">
+                                    <a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image">
+                                         class="card-img-top"
+                                         </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">${track.track}</h5>
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <button type="button" class="btn btn-light" style>🥄</button>
+                                        </div>
+                                        <p class="card-text">${track.artists}</p>
+                                        <button onclick="preview_play(this.nextElementSibling)">
+                                <i class="fa-brands fa-spotify"></i>
+                                </button>
+                                <audio id="play">
+                                    <source src=${track.url} type="audio/mpeg">
+                                </audio>
+                                    </div>
+                                </div>
+                            </div>
+                    `);
+                });
+            }
+        });
+    }
 
         function add_to_playlists() {
             let track = $('#track_selected').val()
@@ -268,7 +289,8 @@
 
         <div id="landingContainer" class="landing">
             <img id="description" src="/description.png"
-                 alt="검색 창에 노래를 검색 해 노래를 담아주세요!" style = "display: block; margin:0 0 10px 0; height: auto; overflow: hidden; max-width: 100%; ">
+                 alt="검색 창에 노래를 검색 해 노래를 담아주세요!"
+                 style="display: block; margin:0 0 10px 0; height: auto; overflow: hidden; max-width: 100%; ">
         </div>
 
         <div id="carouselExampleIndicators" class="carousel slide" style="display: none;">
