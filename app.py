@@ -1,6 +1,6 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
-
+from datetime import datetime
 import requests
 from flask import Flask, render_template, request, jsonify
 
@@ -19,8 +19,6 @@ cid = 'aa4b6b300fdb4797bfe7625e121c99cd'
 secret = 'ddbca51759f340e58471ec1b929bad7b'
 client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secret=secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
-
-
 
 
 @app.route('/')
@@ -43,8 +41,10 @@ def search_results():
             None)
         url_results = track['preview_url']
 
+        datetime_input = datetime.now()
         date_input = datetime.now().date()
-        hour_input = datetime.now().time()
+        hour_input = str(datetime.now().time())[:2]
+        timestamp_input = (datetime_input.timestamp())
 
         track_result = {
             'track': track_results,
@@ -52,30 +52,26 @@ def search_results():
             'image': image_results,
             'url': url_results,
             'date': date_input.strftime('%Y-%m-%d'),
-            'hour': str(hour_input)[:2]}
-        tracks.append(track_result)
+            'hour': int(hour_input),
+            'timestamp': int(timestamp_input)}
 
+        tracks.append(track_result)
         db.search_results.insert_one(track_result)
 
-
-@app.route("/playlists", methods=["POST"])
-def selected_title():
+    return jsonify({'track': tracks})
 
 
-    date_input_receive = request.form['date_input']
-    hour_input_receive = request.form['hour_input']
-    count = db.playlist.count()
+@app.route("/playlist", methods=["POST"])
+def selected_track():
+    track_selected = request.form['track_title']
+    tracks = db.search_results.find({'track': track_selected})
 
+    for track in tracks:
+        result = db.playlist.update_one({'track': track_selected}, {'$inc': {'counts': 1}}, upsert=True)
 
-    doc = {
-        'track': track_selected,
-        'artists': artists_selected,
-        'date': date_input_receive,
-        'hour': hour_input_receive,
-        'count': count,
+        if result.upserted_id:
+            db.playlist.insert_one({'track': track_selected, 'counts': 1})
 
-    }
-    db.playlist.insert_one(doc)
 
 
 @app.route("/playlist", methods=["GET"])
