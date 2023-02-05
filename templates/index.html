@@ -239,22 +239,26 @@
                     let tracks = response.track;
                     let tracksList = $("#tracks-list");
                     tracksList.empty();
+                    let currentHour = new Date().getHours();
                     tracks.forEach(function (track) {
-                        tracksList.append(`
-                        <tr>
-                            <td>${track.track}</td>
-                            <td>${track.artists}</td>
-                            <td><a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image" style="height:200px;"></a></td>
-                            <td><button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
-                                <i class="fa-brands fa-spotify" ></i>
-                                </button>
-                                <audio id="play">
-                                    <source src=${track.url} type="audio/mpeg">
-                                </audio>
-                        </tr>
+                        if (track.hour === currentHour) {
+
+                            tracksList.append(`
+                                <tr>
+                                    <td>${track.track}</td>
+                                    <td>${track.artists}</td>
+                                    <td><a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image" style="height:200px;"></a></td>
+                                    <td><button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                        <i class="fa-brands fa-spotify" ></i>
+                                        </button>
+                                        <audio id="play">
+                                            <source src=${track.url} type="audio/mpeg">
+                                        </audio>
+                             </tr>
                     `);
-                    });
-                }
+                        }
+                    })
+                },
             });
         }
 
@@ -295,7 +299,7 @@
                aria-label="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
                aria-describedby="노래 제목을 검색한 뒤 검색 버튼을 눌러주세요">
 
-        <button class="btn btn-dark" onclick="show_results()" type="submit" id="search_button">
+        <button class="btn btn-dark" onclick="javscript: show_results(); spotify_search();" type="submit" id="search_button">
             <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
         </button>
 
