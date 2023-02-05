@@ -184,63 +184,79 @@
     </script>
 
 
-    <!--<script>
+    <!-- <script>
+
         $(document).ready(function () {
-            spotify_search();
+            show_results();
         });
 
+        function show_results() {
+            document.getElementById('description').style.display = 'none';
+            document.getElementById('table_container').style.display = 'block';
+        }
+    </script>
 
+    <script>
+        var audio = document.getElementById("play");
+        var playing = false;
+
+        function preview_play(audio) {
+            if (playing) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            playing = !playing;
+        }
+
+    </script>
+    <script>
         function spotify_search() {
-            let track_input = $('#track').val()
+            let track = $('#track').val()
 
             $.ajax({
                 type: "POST",
                 url: "/search_results",
-                data: {track_input: track},
+                data: {'track_input': track},
                 success: function (response) {
                 }
             });
-            const landing = document.querySelector('.landing');
-            landing.style.display = 'none';
-            carouselExampleIndicators.style.display = 'flex';
-        }
 
-            function getTracks() {
-        $.ajax({
-            type: "GET",
-            url: "/search_results",
-            data: {},
-            success: function (response) {
-                let tracks = response.track;
-                let tracksList = $("#tracks-list");
-                tracksList.empty();
-                tracks.forEach(function (track) {
-                    tracksList.append(`
-                       <div class="col-sd-4">
-                                <div class="card" style="height: 85%">
-                                    <a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image">
-                                         class="card-img-top"
-                                         </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title">${track.track}</h5>
-                                        <div class="position-absolute bottom-0 end-0">
-                                            <button type="button" class="btn btn-light" style>🥄</button>
-                                        </div>
-                                        <p class="card-text">${track.artists}</p>
-                                        <button onclick="preview_play(this.nextElementSibling)">
-                                <i class="fa-brands fa-spotify"></i>
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            getTracks();
+        });
+
+        function getTracks() {
+            $.ajax({
+                type: "GET",
+                url: "/search_results",
+                data: {},
+                success: function (response) {
+                    let tracks = response.track;
+                    let tracksList = $("#tracks-list");
+                    tracksList.empty();
+                    tracks.forEach(function (track) {
+                        tracksList.append(`
+                        <tr>
+                            <td>${track.track}</td>
+                            <td>${track.artists}</td>
+                            <td><a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image" style="height:200px;"></a></td>
+                            <td><button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                <i class="fa-brands fa-spotify" ></i>
                                 </button>
                                 <audio id="play">
                                     <source src=${track.url} type="audio/mpeg">
                                 </audio>
-                                    </div>
-                                </div>
-                            </div>
+                        </tr>
                     `);
-                });
-            }
-        });
-    }
+                    });
+                }
+            });
+        }
 
         function add_to_playlists() {
             let track = $('#track_selected').val()
