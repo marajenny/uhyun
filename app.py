@@ -61,16 +61,16 @@ def search_results():
     return jsonify({'track': tracks})
 
 
-@app.route("/playlists", methods=["POST"])
+@app.route("/playlist", methods=["POST"])
 def selected_track():
     track_selected = request.form['track_title']
     tracks = db.search_results.find({'track': track_selected})
 
     for track in tracks:
-        result = db.playlists.update_one({'track': track_selected}, {'$inc': {'counts': 1}}, upsert=True)
+        result = db.playlist.update_one({'track': track_selected}, {'$inc': {'counts': 1}}, upsert=True)
 
         if result.upserted_id:
-            db.playlists.insert_one({'track': track_selected, 'counts': 1})
+            db.playlist.insert_one({'track': track_selected, 'counts': 1})
 
 
 
