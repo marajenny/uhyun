@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-          crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+            crossorigin="anonymous"></script>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--  <link rel="stylesheet" type="text/css"-->
+    <!--        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>-->
 
-  <script src="https://kit.fontawesome.com/b1c5ccd7ac.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b1c5ccd7ac.js" crossorigin="anonymous"></script>
 
-  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" as="style" crossorigin
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css"/>
+    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 
-  <!--스타일 시트 연결-->
-  <link rel="stylesheet" href="main_style.css">
+    <!--스타일 시트 연결-->
+    <link rel="stylesheet" href="main_style.css">
 
-  <title>Playlist Bibimbap</title>
+    <title>Playlist Bibimbap</title>
 </head>
 
 
 <body>
-  <!-- 상단 커버(심소연님) -->
-  <div class="cover">
+<!-- 상단 커버(심소연님) -->
+<div class="cover">
     <div class="cover_bibimbap">
-      <b>Playlist Bibimbap</b>
+        <b>Playlist Bibimbap</b>
     </div>
 
     <div class="cover_title">
-      <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
+        <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
 
     </div>
 
     <div class="input-group mb-3" style="width: 60%; align-self: center; margin-top: 20px;">
-      <input id="track_input" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
-             aria-label="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
-             aria-describedby="노래 제목을 검색한 뒤 검색 버튼을 눌러주세요">
+        <input id="track_input" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
+               aria-label="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
+               aria-describedby="노래 제목을 검색한 뒤 검색 버튼을 눌러주세요">
 
-      <button class="btn btn-dark" onclick="add_to_playlists()" type="submit" id="search_button">
-        <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
-      </button>
+        <button class="btn btn-dark" onclick="add_to_playlists()" type="submit" id="search_button">
+            <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
+        </button>
     </div>
 
     <!-- 슬라이드(박드림님)-->
@@ -223,26 +224,127 @@
                 </button>
             </div>
         </div>
-
     </div>
 
-
-
-  <!-- 하단 시간별 노래(곽부미님)-->
-  <h1>
-    <b>오후1시에는 이노래들이 모이고 있어요!</b>
-  </h1>
-
-  <div class="card" style="width: 270px;">
-    <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-         class="card-img-top" alt="앨범 이미지">
-    <div class="card-body">
-      <h5 class="track">노래제목</h5>
-      <p class="count">0명이 듣고 있어요</p>
-      <p class="artist">가수이름</p>
-      <button class="likes">999</button>
-      <a href="" class="spotity_url">이동</a>
+    <div class="popup_add_song">
+        <div class="contents">
+            <button class="btn_close">
+                <img src="./img/ic_close.svg" alt="닫기버튼">
+            </button>
+            <img src="./img/img_bibimbap.svg" alt="비빔밥 이미지">
+            <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
+        </div>
     </div>
+</div>
 
+
+<!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
+<section class="songs_time">
+    <h1>
+        <b>오후1시에는 이노래들이 모이고 있어요!</b>
+    </h1>
+
+    <div class="cards">
+        <div class="card">
+            <div class="card-header">
+                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                     class="card-img-top" alt="앨범 이미지">
+            </div>
+            <div class="card-body">
+                <h5 class="track">노래제목</h5>
+                <p class="count">0명이 듣고 있어요</p>
+            </div>
+            <div class="card-footer">
+                <p class="artist">가수이름</p>
+                <button class="likes">
+                    <img src="./img/ic_heart.svg" alt="">
+                    <strong>999</strong>
+                </button>
+                <a href="" class="preview_url">재생하기</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                     class="card-img-top" alt="앨범 이미지">
+            </div>
+            <div class="card-body">
+                <h5 class="track">노래제목</h5>
+                <p class="count">0명이 듣고 있어요</p>
+            </div>
+            <div class="card-footer">
+                <p class="artist">가수이름</p>
+                <button class="likes">
+                    <img src="./img/ic_heart.svg" alt="">
+                    <strong>999</strong>
+                </button>
+                <a href="" class="preview_url">재생하기</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                     class="card-img-top" alt="앨범 이미지">
+            </div>
+            <div class="card-body">
+                <h5 class="track">노래제목</h5>
+                <p class="count">0명이 듣고 있어요</p>
+            </div>
+            <div class="card-footer">
+                <p class="artist">가수이름</p>
+                <button class="likes">
+                    <img src="./img/ic_heart.svg" alt="">
+                    <strong>999</strong>
+                </button>
+                <a href="" class="preview_url">재생하기</a>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                     class="card-img-top" alt="앨범 이미지">
+            </div>
+            <div class="card-body">
+                <h5 class="track">노래제목</h5>
+                <p class="count">0명이 듣고 있어요</p>
+            </div>
+            <div class="card-footer">
+                <p class="artist">가수이름</p>
+                <button class="likes">
+                    <img src="./img/ic_heart.svg" alt="">
+                    <strong>999</strong>
+                </button>
+                <a href="" class="preview_url">재생하기</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    let count = 0
+    $('.songs_time').find('.card .card-footer .likes').each(function (i, e) {
+        console.log($(this.innerText))
+        // count = parseInt($(this.text()))
+        // console.log(count)
+    })
+
+    // $('.songs_time_card').find('.card .card-footer .likes').each(function (i, e) {
+    //     $(this).on('click', function () {
+    //         count += 1
+    //         button_like_count.text(count)
+    //     })
+    // })
+
+
+    $('.popup_add_song').hide()
+    $('.carousel-item .btn-light').on('click', function () {
+        $('.popup_add_song').show()
+    })
+
+    $('.popup_add_song .btn_close').on('click', function () {
+        $('.popup_add_song').hide()
+    })
+</script>
 </body>
 </html>
