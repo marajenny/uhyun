@@ -29,7 +29,7 @@ def home():
 
 
 @app.route("/search_results", methods=["POST"])
-def spotify_search():
+def search_results():
     track_input_receive = request.form['track_input']
     track_search = sp.search(track_input_receive, limit=10, type='track', market=None)
 
