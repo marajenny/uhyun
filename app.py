@@ -33,7 +33,6 @@ def search_results():
     track_input_receive = request.form['track_input']
     track_search = sp.search(track_input_receive, limit=10, type='track', market=None)
 
-
     tracks = []
 
     for track in track_search['tracks']['items']:
@@ -42,18 +41,21 @@ def search_results():
         image_results = next(
             (image['url'] for image in track['album']['images'] if image['height'] == 640 and image['width'] == 640),
             None)
-        url_results = track['album']['external_urls']['spotify']
+        url_results = track['preview_url']
+
+        date_input = datetime.now().date()
+        hour_input = datetime.now().time()
+
         track_result = {
             'track': track_results,
             'artists': artist_results,
             'image': image_results,
-            'url': url_results
-        }
+            'url': url_results,
+            'date': date_input.strftime('%Y-%m-%d'),
+            'hour': str(hour_input)[:2]}
         tracks.append(track_result)
 
-    for track in tracks:
-        doc = {'track': track['track'], 'artists': track['artists'], 'image': track['image'], 'url': track['url']}
-        db.search_results.insert_one(doc)
+        db.search_results.insert_one(track_result)
 
 
 @app.route("/playlists", methods=["POST"])
