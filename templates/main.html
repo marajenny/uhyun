@@ -49,7 +49,7 @@
 
             color: goldenrod;
             width: 100%;
-            height: 550px;
+            height: 350px;
 
             background-color: #fcc221;
             background-size: cover;
@@ -77,8 +77,11 @@
             display: flex;
             width: 100%;
             box-sizing: border-box;
-            height: 70%;
+            height: 100%;
             align-items: center;
+            vertical-align: middle;
+
+
         }
 
         .carousel slide {
@@ -219,6 +222,10 @@
             width: 50%;
             font-weight: 600;
             opacity: 60%;
+        }
+
+        #description_button {
+            font-size: smaller;
         }
     </style>
 
@@ -373,16 +380,19 @@
 
 
         <div id="landingContainer" class="landing" style="justify-content: center;">
+            <center>
+                <button type="button" class="btn btn-outline-dark" id="description_button" onclick="description_show()"
+                        style="min-width: 180px; justify-self: right; border-radius: 20px; margin-top: 15px;">
+                    <i class="fa-solid fa-spoon"></i>
+                    Playlist Bibimbap이 무엇인가요?
+                    <i class="fa-solid fa-spoon"></i>
+                </button>
 
-            <button type="button" class="btn btn-outline-dark" id="description_button" onclick="description_show()"
-                    style="width: 40%; min-width: 200px; justify-self: center; stroke: goldenrod; border-radius: 20px;">
-                🥄Playlist Bibimbap이 무엇인가요? 🥄
-            </button>
-
-
-            <img id="description"
-                 src="/static/description.png"
-                 style="display: none; margin:0 0 10px 0; height: auto; max-width: 90%; ">
+                <br>
+                <img id="description"
+                     src="/static/description.png"
+                     style="display: none; margin:15px; min-width: 288px; max-width: 100%; ">
+            </center>
         </div>
 
         <!-- 슬라이드(박드림님)-->
