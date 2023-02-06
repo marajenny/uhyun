@@ -5,7 +5,7 @@ from datetime import datetime
 
 from flask import Flask, render_template, request, jsonify
 
-app = Flask(__name__)
+spotify_app = Flask(__name__)
 
 from pymongo import MongoClient
 import certifi
@@ -23,12 +23,12 @@ client_credentials_manager = SpotifyClientCredentials(client_id=cid, client_secr
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 
-@app.route('/')
+@spotify_app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('main.html')
 
 
-@app.route("/search_results", methods=["POST"])
+@spotify_app.route("/search_results", methods=["POST"])
 def search_reults():
     track_input_receive = request.form['track_input']
     track_search = sp.search(q=track_input_receive, limit=10, type='track', market=None)
@@ -63,11 +63,11 @@ def search_reults():
     return 'OK'
 
 
-@app.route("/search_results", methods=["GET"])
+@spotify_app.route("/search_results", methods=["GET"])
 def playlist_get():
     playlist = list(db.search_results.find({}, {'_id': False}).sort([('timestamp', -1)]))
     return jsonify({'track': playlist})
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5001, debug=True)
+    spotify_app.run('0.0.0.0', port=5001, debug=True)
