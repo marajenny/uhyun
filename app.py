@@ -10,7 +10,6 @@ app = Flask(__name__)
 from pymongo import MongoClient
 import certifi
 
-
 ca = certifi.where()
 
 client = MongoClient(
@@ -65,9 +64,9 @@ def search_reults():
 
 @app.route("/search_results", methods=["GET"])
 def playlist_get():
-    playlist = list(db.search_results.find({}, {'_id': False}).sort([('timestamp', -1)]))
+    playlist = list(db.search_results.find({}, {'_id': False}).sort([('timestamp', -1)]).limit(10))
     return jsonify({'track': playlist})
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5001, debug=True)
+    app.run('0.0.0.0', port=5000, debug=True)
