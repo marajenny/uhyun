@@ -271,7 +271,6 @@
                 url: "/search_results",
                 data: {'track_input': track},
                 success: function (response) {
-                    alert(response['msg'])
                     window.location.reload()
 
                 },
@@ -594,7 +593,7 @@
                 <div class="card-footer">
                     <p class="artist">가수이름</p>
                     <button class="likes">
-                        <img src="../img/ic_heart.svg" alt="">
+                        <img src="/ic_heart.svg" alt="">
                         <strong>0</strong>
                     </button>
                     <a href="" class="preview_url">재생하기</a>
