@@ -22,7 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--스타일 시트 연결/커밋테스트-->
-    <link rel="stylesheet" href="../main_style.css">
+    <link rel="stylesheet" href="./main_style.css">
 
     <title>Playlist Bibimbap</title>
 
@@ -227,8 +227,8 @@
     <script>
         function description_show() {
             document.getElementById('description').style.display = 'block';
-            var button = document.getElementById("description_button");
-            var image = document.getElementById("description");
+            let button = document.getElementById("description_button");
+            let image = document.getElementById("description");
 
             button.addEventListener("click", function () {
                 if (image.style.display === "none") {
@@ -250,7 +250,7 @@
             $('#search_button').click(function (event) {
 
                 event.preventDefault();
-                var input = $('#track').val();
+                let input = $('#track').val();
                 if (input.length === 0) {
                     alert("모아 들을 노래를 검색해주세요!");
                 } else {
@@ -281,8 +281,8 @@
     </script>
 
     <script>
-        var audio = document.getElementById("play");
-        var playing = false;
+        let audio = document.getElementById("play");
+        let playing = false;
 
         function preview_play(audio) {
             if (playing) {
