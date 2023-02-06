@@ -280,6 +280,22 @@
         }
     </script>
 
+    <script>
+        var audio = document.getElementById("play");
+        var playing = false;
+
+        function preview_play(audio) {
+            if (playing) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            playing = !playing;
+        }
+
+
+    </script>
+
 
     <script>
         $(document).ready(function () {
@@ -296,18 +312,17 @@
                     tracks.sort((a, b) => b.timestamp - a.timestamp);
                     let tracksList = $("#tracks-list");
                     tracksList.empty();
-                    let top5Tracks = tracks.slice(0, 5);
-                    top5Tracks.forEach(function (track) {
-                        tracksList = `<div class="col-sd-4">
+                    let top10Tracks = tracks.slice(0, 10);
+                    top10Tracks.forEach(function (track) {
+                        let tracksList = `<div class="col-sd-4">
                                     <div class="card">
-                                        <a href="${track.image}" target="_blank">
-                                        <<img src="${track.image}" alt="Track Image" style="height:200px;"></a>
+                                          <<img src="${track.image}" alt="Track Image" style="height:200px;">
                                         <div class="card-body">
                                             <h5 class="card-title">${track.track}</h5>
                                             <div class="position-absolute bottom-0 end-0">
                                                 <button type="button" class="btn btn-light">🥄</button>
                                             </div>
-                                            <div>button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                            <div> <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
                                         <i class="fa-brands fa-spotify" ></i>
                                         </button>
                                         <audio id="play">
@@ -319,19 +334,6 @@
                                 </div>`
                         $('#carousel').append(tracksList);
 
-                        /*<tr>
-                            <td>${track.track}</td>
-                            <td>${track.artists}</td>
-                            <td><a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image" style="height:200px;"></a></td>
-                            <td><button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
-                                <i class="fa-brands fa-spotify" ></i>
-                                </button>
-                                <audio id="play">
-                                    <source src=${track.url} type="audio/mpeg">
-                                </audio>
-                     </tr>*/
-
-
                     })
 
                 }
@@ -342,22 +344,6 @@
 
     </script>
 
-
-    <script>
-        var audio = document.getElementById("play");
-        var playing = false;
-
-        function preview_play(audio) {
-            if (playing) {
-                audio.pause();
-            } else {
-                audio.play();
-            }
-            playing = !playing;
-        }
-
-
-    </script>
 
 </head>
 
@@ -389,9 +375,10 @@
 
         <div id="landingContainer" class="landing" style="justify-content: center;">
 
-                <button type="button" class="btn btn-outline-dark" id="description_button" onclick="description_show()"
-                        style="width: 40%; min-width: 200px; justify-self: center; stroke: goldenrod; border-radius: 20px;">🥄Playlist Bibimbap이 무엇인가요? 🥄
-                </button>
+            <button type="button" class="btn btn-outline-dark" id="description_button" onclick="description_show()"
+                    style="width: 40%; min-width: 200px; justify-self: center; stroke: goldenrod; border-radius: 20px;">
+                🥄Playlist Bibimbap이 무엇인가요? 🥄
+            </button>
 
 
             <img id="description"
