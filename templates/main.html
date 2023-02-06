@@ -298,19 +298,39 @@
                     tracksList.empty();
                     let top10Tracks = tracks.slice(0, 10);
                     top10Tracks.forEach(function (track) {
-                        tracksList.append(`
-                                <tr>
-                                    <td>${track.track}</td>
-                                    <td>${track.artists}</td>
-                                    <td><a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image" style="height:200px;"></a></td>
-                                    <td><button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                        tracksList = `<div class="col-sd-4">
+                                    <div class="card">
+                                        <a href="${track.image}" target="_blank">
+                                        <<img src="${track.image}" alt="Track Image" style="height:200px;"></a>
+                                        <div class="card-body">
+                                            <h5 class="card-title">${track.track}</h5>
+                                            <div class="position-absolute bottom-0 end-0">
+                                                <button type="button" class="btn btn-light">🥄</button>
+                                            </div>
+                                            <div>button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
                                         <i class="fa-brands fa-spotify" ></i>
                                         </button>
                                         <audio id="play">
                                             <source src=${track.url} type="audio/mpeg">
-                                        </audio>
-                             </tr>
-                    `);
+                                        </audio></div>
+                                            <p class="card-text">${track.artists}</p>
+                                        </div>
+                                    </div>
+                                </div>`
+                        $('#carousel').append(tracksList)
+
+                        /*<tr>
+                            <td>${track.track}</td>
+                            <td>${track.artists}</td>
+                            <td><a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image" style="height:200px;"></a></td>
+                            <td><button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                <i class="fa-brands fa-spotify" ></i>
+                                </button>
+                                <audio id="play">
+                                    <source src=${track.url} type="audio/mpeg">
+                                </audio>
+                     </tr>*/
+
 
                     })
 
@@ -393,7 +413,7 @@
 
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <div class="row row-cols-1 row-cols-md-5 g-1">
+                            <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel">
                                 <div class="col-sd-4">
                                     <div class="card h-100">
                                         <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
@@ -467,7 +487,7 @@
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <div class="row row-cols-1 row-cols-md-5 g-1">
+                            <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel">
                                 <div class="col-sd-4">
                                     <div class="card h-100">
                                         <img src="https://cdnimg.melon.co.kr/cm/album/images/102/60/858/10260858_500.jpg?02df39ed806cd5e224ae1be4ab9417dd"
@@ -569,86 +589,86 @@
 
     <!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
 
-        <section class="songs_time">
-            <h1>
-                <b>오후1시에는 이노래들이 모이고 있어요!</b>
-            </h1>
+    <section class="songs_time">
+        <h1>
+            <b>오후1시에는 이노래들이 모이고 있어요!</b>
+        </h1>
 
-            <div class="cards">
-                <div class="card">
-                    <div class="card-header">
-                        <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                             class="card-img-top" alt="앨범 이미지">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="track">노래제목</h5>
-                        <p class="count">33명이 듣고 있어요</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="artist">가수이름</p>
-                        <button class="likes">
-                            <img src="../img/ic_heart.svg" alt="">
-                            <strong>0</strong>
-                        </button>
-                        <a href="" class="preview_url">재생하기</a>
-                    </div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                         class="card-img-top" alt="앨범 이미지">
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                             class="card-img-top" alt="앨범 이미지">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="track">노래제목</h5>
-                        <p class="count">0명이 듣고 있어요</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="artist">가수이름</p>
-                        <button class="likes">
-                            <img src="../img/ic_heart.svg" alt="">
-                            <strong>1</strong>
-                        </button>
-                        <a href="" class="preview_url">재생하기</a>
-                    </div>
+                <div class="card-body">
+                    <h5 class="track">노래제목</h5>
+                    <p class="count">33명이 듣고 있어요</p>
                 </div>
-                <div class="card">
-                    <div class="card-header">
-                        <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                             class="card-img-top" alt="앨범 이미지">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="track">노래제목</h5>
-                        <p class="count">0명이 듣고 있어요</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="artist">가수이름</p>
-                        <button class="likes">
-                            <img src="../img/ic_heart.svg" alt="">
-                            <strong>999</strong>
-                        </button>
-                        <a href="" class="preview_url">재생하기</a>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-header">
-                        <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                             class="card-img-top" alt="앨범 이미지">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="track">노래제목</h5>
-                        <p class="count">0명이 듣고 있어요</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="artist">가수이름</p>
-                        <button class="likes">
-                            <img src="../img/ic_heart.svg" alt="">
-                            <strong>999</strong>
-                        </button>
-                        <a href="" class="preview_url">재생하기</a>
-                    </div>
+                <div class="card-footer">
+                    <p class="artist">가수이름</p>
+                    <button class="likes">
+                        <img src="../img/ic_heart.svg" alt="">
+                        <strong>0</strong>
+                    </button>
+                    <a href="" class="preview_url">재생하기</a>
                 </div>
             </div>
-        </section>
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                         class="card-img-top" alt="앨범 이미지">
+                </div>
+                <div class="card-body">
+                    <h5 class="track">노래제목</h5>
+                    <p class="count">0명이 듣고 있어요</p>
+                </div>
+                <div class="card-footer">
+                    <p class="artist">가수이름</p>
+                    <button class="likes">
+                        <img src="../img/ic_heart.svg" alt="">
+                        <strong>1</strong>
+                    </button>
+                    <a href="" class="preview_url">재생하기</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                         class="card-img-top" alt="앨범 이미지">
+                </div>
+                <div class="card-body">
+                    <h5 class="track">노래제목</h5>
+                    <p class="count">0명이 듣고 있어요</p>
+                </div>
+                <div class="card-footer">
+                    <p class="artist">가수이름</p>
+                    <button class="likes">
+                        <img src="../img/ic_heart.svg" alt="">
+                        <strong>999</strong>
+                    </button>
+                    <a href="" class="preview_url">재생하기</a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
+                         class="card-img-top" alt="앨범 이미지">
+                </div>
+                <div class="card-body">
+                    <h5 class="track">노래제목</h5>
+                    <p class="count">0명이 듣고 있어요</p>
+                </div>
+                <div class="card-footer">
+                    <p class="artist">가수이름</p>
+                    <button class="likes">
+                        <img src="../img/ic_heart.svg" alt="">
+                        <strong>999</strong>
+                    </button>
+                    <a href="" class="preview_url">재생하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <script>
