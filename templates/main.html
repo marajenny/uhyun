@@ -12,218 +12,213 @@
             crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!--  <link rel="stylesheet" type="text/css"-->
-    <!--        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>-->
+    <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>
 
     <script src="https://kit.fontawesome.com/b1c5ccd7ac.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" as="style" crossorigin
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css"/>
-    <!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <!--스타일 시트 연결
-    <link rel="stylesheet" href="./main_style.css">-->
+    <!--스타일 시트 연결-->
+    <link rel="stylesheet" href="main_style.css">
 
     <title>Playlist Bibimbap</title>
+
     <style>
-/*상단 + 슬라이드 */
-* {
-    font-family: 'Pretendard';
-    margin: 0;
-    padding: 0;
-}
+        /*상단 + 슬라이드 */
+        * {
+            font-family: 'Pretendard';
+            margin: 0;
+            padding: 0;
+        }
 
-p{
-    padding: 0;
-    margin: 0;
-}
+        p {
+            padding: 0;
+            margin: 0;
+        }
 
-button {
-    background: none;
-    border: none;
-}
+        button {
+            background: none;
+            border: none;
+        }
 
-.cover {
-    color: goldenrod;
-    width: 100%;
-    height: 550px;
+        .cover {
+            color: goldenrod;
+            width: 100%;
+            height: 550px;
 
-    background-color: #fcc221;
-    background-size: cover;
-    background-position: center;
+            background-color: #fcc221;
+            background-size: cover;
+            background-position: center;
 
-    color: black;
+            color: black;
 
-    display: flex;
-    flex-direction: column;
-    position: relative;
+            display: flex;
+            flex-direction: column;
+            position: relative;
 
-}
+        }
 
-.cover_bibimbap {
-    margin: 10px;
-    text-align: left;
-}
+        .cover_bibimbap {
+            margin: 10px;
+            text-align: left;
+        }
 
-.cover_title {
-    margin-top: 25px;
-    text-align: center;
-}
+        .cover_title {
+            margin-top: 25px;
+            text-align: center;
+        }
 
-.track_result_container {
-    display: flex;
-    width: 100%;
-    box-sizing: border-box;
-}
+        .track_result_container {
+            display: flex;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
-.carousel slide {
-    height: 700px;
-    width: 30%
-}
+        .carousel slide {
+            height: 700px;
+            width: 30%
+        }
 
-.carousel-inner {
-    flex: 1;
-    width: 100%;
-    height: 700px;
-    margin-top: 750px;
-    text-align: left;
-}
+        .carousel-inner {
+            flex: 1;
+            width: 100%;
+            height: 700px;
+            margin-top: 750px;
+            text-align: left;
+        }
 
-.carousel-item > button {
-    width: 100%;
-    height: 100%;
-    position: center;
-    border-radius: 50px;
-    border: 1px solid white;
-}
+        .carousel-item > button {
+            width: 100%;
+            height: 100%;
+            position: center;
+            border-radius: 50px;
+            border: 1px solid white;
+        }
 
-.container-fluid > button {
-    margin-top: 325px;
-    margin-left: -65px;
-    margin-right: -65px;
-}
+        .popup_add_song {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100vh;
+            z-index: 10;
+        }
 
+        .popup_add_song .contents {
+            margin: 200px auto;
+            width: 430px;
+            height: 420px;
+            border-radius: 28px;
+            background-color: #fff;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
 
-.popup_add_song {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 100%;
-    height: 100vh;
-    z-index: 10;
-}
+        .popup_add_song .contents .btn_close {
+            position: absolute;
+            top: 26px;
+            right: 26px;
+        }
 
-.popup_add_song .contents {
-    margin: 200px auto;
-    width: 430px;
-    height: 420px;
-    border-radius: 28px;
-    background-color: #fff;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+        .popup_add_song .contents > img {
+            width: 240px;
+            margin-bottom: 26px;
+        }
 
-.popup_add_song .contents .btn_close {
-    position: absolute;
-    top: 26px;
-    right: 26px;
-}
+        .popup_add_song .contents > p {
+            font-weight: 600;
+            font-size: 24px;
+        }
 
-.popup_add_song .contents > img {
-    width: 240px;
-    margin-bottom: 26px;
-}
+        .popup_add_song .contents > strong {
+            font-weight: 800;
+        }
 
-.popup_add_song .contents > p {
-    font-weight: 600;
-    font-size: 24px;
-}
+        .songs_time {
+            background-color: #f6f6f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-.popup_add_song .contents > strong {
-    font-weight: 800;
-}
+        .songs_time > h1 {
+            font-size: 32px;
+            text-align: center;
+            padding: 58px 0 32px 0px;
+        }
 
-.songs_time{
-    background-color: #f6f6f6;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
+        .songs_time .cards {
+            width: 1280px;
+            display: flex;
+            gap: 12px;
+        }
 
-.songs_time > h1 {
-    font-size: 32px;
-    text-align: center;
-    padding: 58px 0 32px 0px;
-}
+        .songs_time .card {
+            width: 276px;
+            border: 0px;
+        }
 
-.songs_time .cards{
-    width: 1280px;
-    display: flex;
-    gap: 12px;
-}
+        .songs_time .card .card-header {
+            width: 100%;
+            height: 177px;
+            padding: 0;
+        }
 
-.songs_time .card{
-    width: 276px;
-    border: 0px;
-}
+        .songs_time .card .card-header > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.songs_time .card .card-header{
-    width: 100%;
-    height: 177px;
-    padding: 0;
-}
+        .songs_time .card .card-body {
+            padding-bottom: 0;
+            margin-bottom: 6px;
+        }
 
-.songs_time .card .card-header > img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+        .songs_time .card .card-body .track {
+            font-size: 18px;
+            font-weight: 900;
+        }
 
-.songs_time .card .card-body{
-    padding-bottom: 0;
-    margin-bottom: 6px;
-}
+        .songs_time .card .card-body .count {
+            font-size: 14px;
+            font-weight: 700;
+        }
 
-.songs_time .card .card-body .track{
-    font-size: 18px;
-    font-weight: 900;
-}
+        .songs_time .card .card-footer {
+            border: 0px;
+            background-color: #fff;
+        }
 
-.songs_time .card .card-body .count{
-    font-size: 14px;
-    font-weight: 700;
-}
+        .songs_time .card .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.songs_time .card .card-footer{
-    border: 0px;
-    background-color: #fff;
-}
-
-.songs_time .card .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.songs_time .card .card-footer .artist{
-    font-size: 14px;
-    width: 50%;
-    font-weight: 600;
-    opacity: 60%;
-}
-</style>
+        .songs_time .card .card-footer .artist {
+            font-size: 14px;
+            width: 50%;
+            font-weight: 600;
+            opacity: 60%;
+        }
+    </style>
 </head>
-
 
 <body>
 <!-- 상단 커버(심소연님) -->
 <div class="cover">
     <div class="cover_bibimbap">
-        <b>Playlist Bibimbap</b>
+        <button onclick="window.location.reload()" style="background-color: transparent; border: 0;outline:0;"><b>Playlist
+            Bibimbap</b>
+        </button>
     </div>
 
     <div class="cover_title">
@@ -252,6 +247,7 @@ button {
                         aria-label="Slide 2"></button>
             </div>
             <div class="container-fluid">
+
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row row-cols-1 row-cols-md-5 g-1">
@@ -514,8 +510,8 @@ button {
 <script>
     const btns_like = document.querySelectorAll('.songs_time .card .likes')
 
-    btns_like.forEach((item, index)=>{
-        item.addEventListener('click', function (){
+    btns_like.forEach((item, index) => {
+        item.addEventListener('click', function () {
             let count = parseInt(item.children[1].innerText)
             count += 1
             item.children[1].innerText = count
