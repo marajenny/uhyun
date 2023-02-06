@@ -252,13 +252,13 @@
             </div>
             <div class="card-body">
                 <h5 class="track">노래제목</h5>
-                <p class="count">0명이 듣고 있어요</p>
+                <p class="count">33명이 듣고 있어요</p>
             </div>
             <div class="card-footer">
                 <p class="artist">가수이름</p>
                 <button class="likes">
                     <img src="./img/ic_heart.svg" alt="">
-                    <strong>999</strong>
+                    <strong>0</strong>
                 </button>
                 <a href="" class="preview_url">재생하기</a>
             </div>
@@ -276,7 +276,7 @@
                 <p class="artist">가수이름</p>
                 <button class="likes">
                     <img src="./img/ic_heart.svg" alt="">
-                    <strong>999</strong>
+                    <strong>1</strong>
                 </button>
                 <a href="" class="preview_url">재생하기</a>
             </div>
@@ -322,19 +322,15 @@
 
 
 <script>
-    let count = 0
-    $('.songs_time').find('.card .card-footer .likes').each(function (i, e) {
-        console.log($(this.innerText))
-        // count = parseInt($(this.text()))
-        // console.log(count)
-    })
+    const btns_like = document.querySelectorAll('.songs_time .card .likes')
 
-    // $('.songs_time_card').find('.card .card-footer .likes').each(function (i, e) {
-    //     $(this).on('click', function () {
-    //         count += 1
-    //         button_like_count.text(count)
-    //     })
-    // })
+    btns_like.forEach((item, index)=>{
+        item.addEventListener('click', function (){
+            let count = parseInt(item.children[1].innerText)
+            count += 1
+            item.children[1].innerText = count
+        })
+    })
 
 
     $('.popup_add_song').hide()
