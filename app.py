@@ -59,7 +59,7 @@ def search_reults():
         tracks.append(track_result)
         db.search_results.insert_one(track_result)
 
-    return 'OK'
+    return jsonify({'msg':'노래를 찾았어요!'})
 
 
 @app.route("/search_results", methods=["GET"])
