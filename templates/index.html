@@ -13,33 +13,17 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"/>
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+
 
     <script src="https://kit.fontawesome.com/b1c5ccd7ac.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" as="style" crossorigin
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <!--스타일 시트 연결-->
-    <link rel="stylesheet" href="main_style.css">
+    <title>Playlist Bibimbap</title>
 
     <style>
-        /*상단 + 슬라이드 */
+
         * {
             font-family: 'Pretendard';
-            margin: 0;
-            padding: 0;
-        }
-
-        p {
-            padding: 0;
-            margin: 0;
-        }
-
-        button {
-            background: none;
-            border: none;
         }
 
         .clearfix {
@@ -54,7 +38,7 @@
         .cover {
             color: goldenrod;
             width: 100%;
-            height: 550px;
+            height: 500px;
 
             background-color: #fcc221;
             background-size: cover;
@@ -62,11 +46,22 @@
 
             color: black;
 
+
             display: flex;
             flex-direction: column;
             position: relative;
 
+
         }
+
+        .landing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
 
         .cover_bibimbap {
             margin: 10px;
@@ -76,160 +71,225 @@
         .cover_title {
             margin-top: 25px;
             text-align: center;
+
         }
 
-        .track_result_container {
-            display: flex;
+        .container {
             width: 100%;
-            box-sizing: border-box;
+            height: 100%;
+            margin: auto;
+            display: inline-block;
+            grid-template-columns: 10% 80% 10%;
+            overflow: hidden;
+
         }
+
+        .box {
+            box-sizing: content-box;
+            align-self: center;
+            width: 90%;
+            height: 250px;
+            margin: 0 auto;
+            overflow: hidden;
+            text-align: center;
+
+        }
+
+        .start-50 {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .translate-middle {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /*spotify 상위 10개 노래 목록*/
+
+        #carouselExampleIndicators {
+            width: 100%;
+            display: inline-block;
+        }
+
 
         .carousel slide {
-            height: 700px;
-            width: 30%
+            height: 100%;
+            width: 100%;
+
         }
 
         .carousel-inner {
             flex: 1;
             width: 100%;
-            height: 700px;
-            margin-top: 750px;
+            height: 100%;
+            position: relative;
+            top: -120px;
             text-align: left;
         }
 
         .carousel-item > button {
             width: 100%;
-            height: 100%;
+            height: auto;
             position: center;
             border-radius: 50px;
             border: 1px solid white;
         }
 
-        .popup_add_song {
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            width: 100%;
-            height: 100vh;
-            z-index: 10;
-        }
-
-        .popup_add_song .contents {
-            margin: 200px auto;
-            width: 430px;
-            height: 420px;
-            border-radius: 28px;
-            background-color: #fff;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup_add_song .contents .btn_close {
+        .carousel-control-prev {
             position: absolute;
-            top: 26px;
-            right: 26px;
+            top: -100%;
+            margin-left: -100px
         }
 
-        .popup_add_song .contents > img {
-            width: 240px;
-            margin-bottom: 26px;
+        .carousel-control-next {
+            position: absolute;
+            top: -100%;
+            margin-right: -100px
+
         }
 
-        .popup_add_song .contents > p {
-            font-weight: 600;
-            font-size: 24px;
+        h5 {
+            font-size: 1em;
         }
 
-        .popup_add_song .contents > strong {
-            font-weight: 800;
+        @media only screen and (min-width: 800px) {
+            h5 {
+                font-size: 1.2em;
+            }
         }
 
-        .songs_time {
-            background-color: #f6f6f6;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .songs_time > h1 {
-            font-size: 32px;
-            text-align: center;
-            padding: 58px 0 32px 0px;
-        }
-
-        .songs_time .cards {
-            width: 1280px;
-            display: flex;
-            gap: 12px;
-        }
-
-        .songs_time .card {
-            width: 276px;
-            border: 0px;
-        }
-
-        .songs_time .card .card-header {
-            width: 100%;
-            height: 177px;
-            padding: 0;
-        }
-
-        .songs_time .card .card-header > img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .songs_time .card .card-body {
-            padding-bottom: 0;
-            margin-bottom: 6px;
-        }
-
-        .songs_time .card .card-body .track {
-            font-size: 18px;
-            font-weight: 900;
-        }
-
-        .songs_time .card .card-body .count {
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .songs_time .card .card-footer {
-            border: 0px;
-            background-color: #fff;
-        }
-
-        .songs_time .card .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .songs_time .card .card-footer .artist {
-            font-size: 14px;
-            width: 50%;
-            font-weight: 600;
-            opacity: 60%;
-        }
     </style>
 
-    <title>Playlist Bibimbap</title>
+    <script>
+        function show_results() {
+            document.getElementById('description').style.display = 'none';
+            document.getElementById('carouselExampleIndicators').style.display = 'block';
+        }
+    </script>
+
+    <script>
+        var audio = document.getElementById("play");
+        var playing = false;
+
+        function preview_play(audio) {
+            if (playing) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            playing = !playing;
+        }
+
+    </script>
+
+
+    <!-- <script>
+
+        $(document).ready(function () {
+            show_results();
+        });
+
+        function show_results() {
+            document.getElementById('description').style.display = 'none';
+            document.getElementById('table_container').style.display = 'block';
+        }
+    </script>
+
+    <script>
+        var audio = document.getElementById("play");
+        var playing = false;
+
+        function preview_play(audio) {
+            if (playing) {
+                audio.pause();
+            } else {
+                audio.play();
+            }
+            playing = !playing;
+        }
+
+    </script>
+    <script>
+        function spotify_search() {
+            let track = $('#track').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/search_results",
+                data: {'track_input': track},
+                success: function (response) {
+                }
+            });
+
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            getTracks();
+        });
+
+        function getTracks() {
+            $.ajax({
+                type: "GET",
+                url: "/search_results",
+                data: {},
+                success: function (response) {
+                    let tracks = response.track;
+                    let tracksList = $("#tracks-list");
+                    tracksList.empty();
+                    let currentHour = new Date().getHours();
+                    tracks.forEach(function (track) {
+                        if (track.hour === currentHour) {
+
+                            tracksList.append(`
+                                <tr>
+                                    <td>${track.track}</td>
+                                    <td>${track.artists}</td>
+                                    <td><a href="${track.image}" target="_blank"><img src="${track.image}" alt="Track Image" style="height:200px;"></a></td>
+                                    <td><button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                        <i class="fa-brands fa-spotify" ></i>
+                                        </button>
+                                        <audio id="play">
+                                            <source src=${track.url} type="audio/mpeg">
+                                        </audio>
+                             </tr>
+                    `);
+                        }
+                    })
+                },
+            });
+        }
+
+        function add_to_playlists() {
+            let track = $('#track_selected').val()
+            let date = $('#date_selected').val()
+            let hour = $('#hour_selected').val()
+            $.ajax({
+                type: 'POST',
+                url: '/playlist',
+                data: {track_selected: track, date_selected: date, hour_selected: hour},
+                success: function (response) {
+                    alert(response['비빔밥'])
+
+
+                }
+            });
+        }
+
+
+    </script>-->
 
 </head>
-
-
 <body>
-<!-- 상단 커버(심소연님) -->
-<div class="cover">
-    <div class="cover_bibimbap">
-        <b>Playlist Bibimbap</b>
-    </div>
 
+<div class="cover">
+
+    <div class="cover_bibimbap">
+        <button onclick="window.reload()" style="background-color: transparent; border: 0;outline:0;"><b>Playlist Bibimbap</b>
+        </button>
+    </div>
     <div class="cover_title">
         <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
 
@@ -240,28 +300,34 @@
                aria-label="지금 듣고 있는 노래를 검색해 노래를 모아보세요!"
                aria-describedby="노래 제목을 검색한 뒤 검색 버튼을 눌러주세요">
 
-        <button class="btn btn-dark" onclick="add_to_playlists()" type="submit" id="search_button">
+        <button class="btn btn-dark" onclick="javscript: show_results(); spotify_search();" type="submit" id="search_button">
             <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
         </button>
+
     </div>
 
-    <!-- 슬라이드(박드림님)-->
-    <div id="carouselExampleIndicators" class="carousel slide">
-        <div class="position-absolute top-50 start-50 translate-middle">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-            </div>
-            <div class="container-fluid">
+    <div class="box clearfix">
 
+        <div id="landingContainer" class="landing">
+            <img id="description" src="static/description.png"
+                 alt="검색 창에 노래를 검색 해 노래를 담아주세요!"
+                 style="display: block; margin:0 0 10px 0; height: auto; overflow: hidden; max-width: 100%; ">
+        </div>
+
+        <div id="carouselExampleIndicators" class="carousel slide" style="display: none;">
+            <div class="position-absolute start-50 translate-middle">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row row-cols-1 row-cols-md-5 g-1">
                             <div class="col-sd-4">
-                                <div class="card h-100">
+                                <div class="card" style="height: 85%">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -275,7 +341,7 @@
                                 </div>
                             </div>
                             <div class="col-sd-4">
-                                <div class="card">
+                                <div class="card" style="height: 85%">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -289,7 +355,7 @@
                                 </div>
                             </div>
                             <div class="col-sd-4">
-                                <div class="card">
+                                <div class="card" style="height: 85%">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -303,7 +369,7 @@
                                 </div>
                             </div>
                             <div class="col-sd-4">
-                                <div class="card">
+                                <div class="card" style="height: 85%">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -317,7 +383,7 @@
                                 </div>
                             </div>
                             <div class="col-sd-4">
-                                <div class="card">
+                                <div class="card" style="height: 85%">
                                     <img src="https://www.sisain.co.kr/news/photo/202209/48519_88034_2517.jpg"
                                          class="card-img-top"
                                          alt="이미지를 준비 중입니다">
@@ -419,123 +485,10 @@
                 </button>
             </div>
         </div>
+
     </div>
 
-    <div class="popup_add_song">
-        <div class="contents">
-            <button class="btn_close">
-                <img src="../img/ic_close.svg" alt="닫기버튼">
-            </button>
-            <img src="../img/img_bibimbap.svg" alt="비빔밥 이미지">
-            <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
-        </div>
-    </div>
 </div>
 
-
-<!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
-<section class="songs_time">
-    <h1>
-        <b>오후1시에는 이노래들이 모이고 있어요!</b>
-    </h1>
-
-    <div class="cards">
-        <div class="card">
-            <div class="card-header">
-                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                     class="card-img-top" alt="앨범 이미지">
-            </div>
-            <div class="card-body">
-                <h5 class="track">노래제목</h5>
-                <p class="count">0명이 듣고 있어요</p>
-            </div>
-            <div class="card-footer">
-                <p class="artist">가수이름</p>
-                <button class="likes">
-                    <img src="../img/ic_heart.svg" alt="">
-                    <strong>999</strong>
-                </button>
-                <a href="" class="preview_url">재생하기</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                     class="card-img-top" alt="앨범 이미지">
-            </div>
-            <div class="card-body">
-                <h5 class="track">노래제목</h5>
-                <p class="count">0명이 듣고 있어요</p>
-            </div>
-            <div class="card-footer">
-                <p class="artist">가수이름</p>
-                <button class="likes">
-                    <img src="../img/ic_heart.svg" alt="">
-                    <strong>999</strong>
-                </button>
-                <a href="" class="preview_url">재생하기</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                     class="card-img-top" alt="앨범 이미지">
-            </div>
-            <div class="card-body">
-                <h5 class="track">노래제목</h5>
-                <p class="count">0명이 듣고 있어요</p>
-            </div>
-            <div class="card-footer">
-                <p class="artist">가수이름</p>
-                <button class="likes">
-                    <img src="../img/ic_heart.svg" alt="">
-                    <strong>999</strong>
-                </button>
-                <a href="" class="preview_url">재생하기</a>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-header">
-                <img src="https://musicmeta-phinf.pstatic.net/album/008/500/8500274.jpg?type=r480Fll&v=20230104181603"
-                     class="card-img-top" alt="앨범 이미지">
-            </div>
-            <div class="card-body">
-                <h5 class="track">노래제목</h5>
-                <p class="count">0명이 듣고 있어요</p>
-            </div>
-            <div class="card-footer">
-                <p class="artist">가수이름</p>
-                <button class="likes">
-                    <img src="../img/ic_heart.svg" alt="">
-                    <strong>999</strong>
-                </button>
-                <a href="" class="preview_url">재생하기</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<script>
-    const btns_like = document.querySelectorAll('.songs_time .card .likes')
-
-    btns_like.forEach((item, index) => {
-        item.addEventListener('click', function () {
-            let count = parseInt(item.children[1].innerText)
-            count += 1
-            item.children[1].innerText = count
-        })
-    })
-
-
-    $('.popup_add_song').hide()
-    $('.carousel-item .btn-light').on('click', function () {
-        $('.popup_add_song').show()
-    })
-
-    $('.popup_add_song .btn_close').on('click', function () {
-        $('.popup_add_song').hide()
-    })
-</script>
 </body>
 </html>

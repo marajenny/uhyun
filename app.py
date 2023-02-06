@@ -1,13 +1,15 @@
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+
 from datetime import datetime
-import requests
+
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
 from pymongo import MongoClient
 import certifi
+
 
 ca = certifi.where()
 
@@ -23,11 +25,11 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('main.html')
 
 
 @app.route("/search_results", methods=["POST"])
-def search_results():
+def search_reults():
     track_input_receive = request.form['track_input']
     track_search = sp.search(q=track_input_receive, limit=10, type='track', market=None)
 
@@ -58,27 +60,14 @@ def search_results():
         tracks.append(track_result)
         db.search_results.insert_one(track_result)
 
-    return jsonify({'track': tracks})
+    return 'OK'
 
 
-@app.route("/playlist", methods=["POST"])
-def selected_track():
-    track_selected = request.form['track_title']
-    tracks = db.search_results.find({'track': track_selected})
-
-    for track in tracks:
-        result = db.playlist.update_one({'track': track_selected}, {'$inc': {'counts': 1}}, upsert=True)
-
-        if result.upserted_id:
-            db.playlist.insert_one({'track': track_selected, 'counts': 1})
-
-
-
-@app.route("/playlist", methods=["GET"])
+@app.route("/search_results", methods=["GET"])
 def playlist_get():
-    playlist_list = list(db.playlist.find({}, {'_id': False}))
-    return jsonify({'playlist': playlist_list})
+    playlist = list(db.search_results.find({}, {'_id': False}).sort([('timestamp', -1)]))
+    return jsonify({'track': playlist})
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=5001, debug=True)
