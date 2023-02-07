@@ -87,16 +87,16 @@ def selected_track_post():
             'count': track_count,
             'timestamp': track_data['timestamp']
         }
-    db.selected_tracks.insert_one(selected_track)
-    print("selected_track:", selected_track)
+        db.selected_tracks.insert_one(selected_track)
+        print("selected_track:", selected_track)
 
     return 'OK'
 
 
 @app.route("/selected_tracks", methods=["GET"])
 def selected_track_get():
-    selected_track = list(db.selected_tracks.find({}, {'_id': False}))
-    return jsonify({'selected_track': selected_track})
+    selected_track_list = list(db.selected_tracks.find({}, {'_id': False}))
+    return jsonify({'selected_track': selected_track_list})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

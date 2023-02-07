@@ -394,7 +394,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track()">🥄</button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)">🥄</button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
@@ -414,16 +414,14 @@
 
                 }
             });
-
-
         }
 
     </script>
     <script>
 
-        function select_track() {
-            let selected_track = $('#track_result').text()
-            let selected_artists = $('#artists_result').text()
+        function select_track(button) {
+            let selected_track = $(button).closest(".card").find("#track_result").text();
+            let selected_artists = $(button).closest(".card").find("#artists_result").text();
 
             $.ajax({
                 type: "POST",
@@ -435,6 +433,7 @@
 
             });
         }
+
     </script>
 
     <script>
