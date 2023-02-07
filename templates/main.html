@@ -481,7 +481,6 @@
                 data: {},
                 success: function (response) {
                     let selectedTracks = response.selected_track;
-                    selectedTracks.sort((a, b) => b.timestamp - a.timestamp);
                     let top1Track = selectedTracks.slice(0, 1);
                     top1Track.forEach(function (selected_track) {
                         let selected_trackList = `<div class="col-sd-4">
@@ -509,7 +508,7 @@
                                 </div>
                             </div>`
 
-                        $('#cards-box').append(selected_trackList)
+                        $('#cards-box').prepend(selected_trackList)
                     })
                 },
             })
