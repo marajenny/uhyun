@@ -376,9 +376,9 @@
                                     <div class="card">
                                           <img src="${track.image}" alt="Track Image" style="height:200px;">
                                         <div class="card-body">
-                                            <h5 class="card-title">${track.track}</h5>
+                                            <h5 class="card-title" id="track_result">${track.track}</h5>
                                             <div class="position-absolute bottom-0 end-0">
-                                                <button type="button" class="btn btn-light">🥄</button>
+                                                <button type="button" id="select_track" class="btn btn-light" onclick="select_track()">🥄</button>
                                             </div>
                                             <div> <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
                                         <i class="fa-brands fa-spotify" ></i>
@@ -401,7 +401,22 @@
         }
 
     </script>
+    <script>
 
+        function select_track() {
+            let selected_track = $('#track_result').val()
+
+            $.ajax({
+                type: "POST",
+                url: "/selected_tracks",
+                data: {'select_track': selected_track},
+                success: function (response) {
+
+                },
+
+            });
+        }
+    </script>
 
 </head>
 
@@ -471,7 +486,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">track_results_1</h5>
                                         <div class="position-absolute bottom-0 end-0">
-                                            <button type="button" class="btn btn-light">🥄</button>
+                                            <button type="button" id="select_track" class="btn btn-light" onclick="select_track()">🥄</button>
                                         </div>
                                         <p class="card-text">artist_results_1</p>
                                     </div>
@@ -639,7 +654,7 @@
 
     <div class="songs_time">
         <h1>
-            <b>오후1시에는 이노래들이 모이고 있어요!</b>
+            <b>오후1시에는 이 노래들이 모이고 있어요!</b>
         </h1>
 
         <div class="cards">
