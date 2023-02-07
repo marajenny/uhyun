@@ -419,11 +419,11 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
-                                                        <i class="fa-brands fa-spotify" ></i>
+                                                        <i class="fa-brands fa-spotify fa-2x" ></i>
                                                     </button>
                                                     <audio id="play">
                                                         <source src=${track.url} type="audio/mpeg">
@@ -487,28 +487,25 @@
                         let selected_trackList = `<div class="col-sd-4">
                             <div class="cards" id="songs_time">
                                 <div classe="card">
-                                    <img src="${selected_track.image}" alt="Track Image" style="height:100%;">
-                                        <div class="card-body">
+                                    <div class="card-body">
+                                        <img src="${selected_track.image}" alt="Track Image" style="height:100%;">
                                             <h5 class="card-title" id="selected_tracks">${selected_track.track}</h5>
                                             <p class="count">${selected_track.count}명이 듣고 있어요</p>
-                                        </div>
-
-                                </div>
-                                <div class="card-footer">
-                                    <p class="card-text">${selected_track.artist}</p>
-                                    <button class="likes">
-                                        <i class="fa-solid fa-heart"></i>
+                                    </div>
+                                    <div class="card-footer">
+                                        <p class="card-text">${selected_track.artist}</p>
+                                        <button class="likes">
+                                        <i class="fa-solid fa-heart fa-3x"></i>
                                             <strong>0</strong>
-                                    </button>
-                                   <div>
-                                            <button onClick="preview_play(this.nextElementSibling)"
+                                        </button>
+                                         <button onClick="preview_play(this.nextElementSibling)"
                                                     style="border:0; outline:0; background-color:transparent;">
-                                                <i class="fa-brands fa-spotify"></i>
-                                            </button>
-                                            <audio id="play">
-                                                <source src=${selected_track.url} type="audio/mpeg">
-                                            </audio>
-                                        </div>
+                                                <i class="fa-brands fa-spotify fa-3x"></i>
+                                         </button>
+                                         <audio id="play">
+                                             <source src=${selected_track.url} type="audio/mpeg">
+                                         </audio>
+                                    </div>
                                 </div>
                             </div>`
 
