@@ -103,7 +103,7 @@ def selected_track_post():
 @app.route("/selected_tracks", methods=["GET"])
 def selected_track_get():
 
-    selected_track_list = list(db.selected_tracks.find({}, {'_id': False}))
+    selected_track_list = list(db.selected_tracks.find({}, {'_id': False}).sort([('timestamp', -1)]).limit(1))
     return jsonify({'selected_track': selected_track_list})
 
 if __name__ == '__main__':
