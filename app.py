@@ -28,7 +28,7 @@ def home():
 
 
 @app.route("/search_results", methods=["POST"])
-def search_reults():
+def search_results():
     track_input_receive = request.form['track_input']
     track_search = sp.search(q=track_input_receive, limit=10, type='track', market=None)
 
@@ -59,7 +59,7 @@ def search_reults():
         tracks.append(track_result)
         db.search_results.insert_one(track_result)
 
-    return jsonify({'msg':'노래를 찾았어요!'})
+    return 'OK'
 
 
 @app.route("/search_results", methods=["GET"])
@@ -67,6 +67,27 @@ def playlist_get():
     playlist = list(db.search_results.find({}, {'_id': False}).sort([('timestamp', -1)]).limit(10))
     return jsonify({'track': playlist})
 
+
+@app.route("/selected_tracks", methods=["POST"])
+def 가
+    selected_track_receive = request.form['select_track']
+    selected_track_data = db.search_results.find({"track": selected_track_receive})
+    track_count = 0
+
+
+    for track_data in selected_track_data:
+        track_count += 1
+        selected_track = {
+            "track": track_data["track"],
+            "artists": track_data["artists"],
+            "image": track_data["image"],
+            "url": track_data["url"],
+            "hour": track_data["hour"],
+            "count": track_count
+        }
+        db.selected_tracks.insert_one(selected_track)
+
+    return 'OK'
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
