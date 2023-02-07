@@ -72,7 +72,7 @@ def playlist_get():
 def selected_track_get():
     selected_track_receive = request.form['select_track']
     print("selected_track_receive:", selected_track_receive)
-    selected_track_data = db.search_results.find({"attention": selected_track_receive})
+    selected_track_data = db.search_results.find({"track": selected_track_receive})
     track_count = 0
 
     for track_data in selected_track_data:
