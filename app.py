@@ -69,7 +69,7 @@ def playlist_get():
 
 
 @app.route("/selected_tracks", methods=["POST"])
-def 가
+def selected_track_get():
     selected_track_receive = request.form['select_track']
     selected_track_data = db.search_results.find({"track": selected_track_receive})
     track_count = 0
