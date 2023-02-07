@@ -69,10 +69,11 @@ def playlist_get():
 
 
 @app.route("/selected_tracks", methods=["POST"])
-def selected_track_get():
+def selected_track_post():
     selected_track_receive = request.form['select_track']
+    selected_artists_receive = request.form['select_artists']
     print("selected_track_receive:", selected_track_receive)
-    selected_track_data = db.search_results.find({"track": selected_track_receive})
+    selected_track_data = db.search_results.find({"track": selected_track_receive, "artists": selected_artists_receive})
     track_count = 0
 
     for track_data in selected_track_data:
@@ -83,12 +84,19 @@ def selected_track_get():
             'image': track_data['image'],
             'url': track_data['url'],
             'hour': track_data['hour'],
-            'count': track_count
+            'count': track_count,
+            'timestamp': track_data['timestamp']
         }
-        db.selected_tracks.insert_one(selected_track)
-        print("selected_track:", selected_track)
+    db.selected_tracks.insert_one(selected_track)
+    print("selected_track:", selected_track)
 
     return 'OK'
+
+
+@app.route("/selected_tracks", methods=["GET"])
+def selected_track_get():
+    selected_track = list(db.selected_tracks.find({}, {'_id': False}))
+    return jsonify({'selected_track': selected_track})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

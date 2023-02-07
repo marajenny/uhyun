@@ -380,28 +380,32 @@
                 url: "/search_results",
                 data: {},
                 success: function (response) {
+                    console.log(response)
                     let tracks = response.track;
                     tracks.sort((a, b) => b.timestamp - a.timestamp);
                     let tracksList = $("#tracks-list");
                     tracksList.empty();
                     let top10Tracks = tracks.slice(0, 10);
                     top10Tracks.forEach(function (track) {
-                        let tracksList = `<div class="col-sd-4">
+                        let tracksList = `
+                                <div class="col-sd-4">
                                     <div class="card">
-                                          <img src="${track.image}" alt="Track Image" style="height:200px;">
-                                        <div class="card-body">
-                                            <h5 class="card-title" id="track_result">${track.track}</h5>
-                                            <div class="position-absolute bottom-0 end-0">
-                                                <button type="button" id="select" class="btn btn-light" onclick="select_track()">🥄</button>
+                                        <img src="${track.image}" alt="Track Image" style="height:100%;">
+                                            <div class="card-body">
+                                                <h5 class="card-title" id="track_result">${track.track}</h5>
+                                                <div class="position-absolute bottom-0 end-0">
+                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track()">🥄</button>
+                                                </div>
+                                                <div>
+                                                    <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                                        <i class="fa-brands fa-spotify" ></i>
+                                                    </button>
+                                                    <audio id="play">
+                                                        <source src=${track.url} type="audio/mpeg">
+                                                    </audio>
+                                                </div>
+                                                <p class="card-text" id="artists_result">${track.artists}</p>
                                             </div>
-                                            <div> <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
-                                        <i class="fa-brands fa-spotify" ></i>
-                                        </button>
-                                        <audio id="play">
-                                            <source src=${track.url} type="audio/mpeg">
-                                        </audio></div>
-                                            <p class="card-text">${track.artists}</p>
-                                        </div>
                                     </div>
                                 </div>`
                         $('#carousel').append(tracksList);
@@ -419,11 +423,12 @@
 
         function select_track() {
             let selected_track = $('#track_result').text()
+            let selected_artists = $('#artists_result').text()
 
             $.ajax({
                 type: "POST",
                 url: "/selected_tracks",
-                data: {'select_track': selected_track},
+                data: {'select_track': selected_track, 'select_artists': selected_artists},
                 success: function (response) {
 
                 },
@@ -683,7 +688,7 @@
         </div>
     </div>
 
-    <div class="popup_add_song">
+    <div class="popup_add_song" style="display: none;">
         <div class="contents">
             <button class="btn_close">
                 <img src="../img/ic_close.svg" alt="닫기버튼">
