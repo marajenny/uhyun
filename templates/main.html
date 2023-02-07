@@ -394,7 +394,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon" style="transform: scaleX(-1)"></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
@@ -420,7 +420,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon" style="transform: scaleX(-1)"></i></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
@@ -463,6 +463,55 @@
     </script>
 
     <script>
+        $(document).ready(function () {
+            selected_tracks();
+        });
+
+        function selected_tracks() {
+            $.ajax({
+                type: 'GET',
+                url: '/selected_tracks',
+                data: {},
+                success: function (response) {
+                    let tracks = response.track;
+                    let selected_tracksList = `<div className="col-sd-4">
+                            <div className="cards" id="songs_time">
+                                <div className="card">
+                                    <img src="${tracks.image}" alt="Track Image" style="height:100%;">
+                                        <div className="card-body">
+                                            <h5 className="card-title" id="selected_tracks">${tracks.track}</h5>
+                                            <p className="count">${tracks.count}명이 듣고 있어요</p>
+                                        </div>
+                                        <div>
+                                            <button onClick="preview_play(this.nextElementSibling)"
+                                                    style="border:0; outline:0; background-color:transparent;">
+                                                <i className="fa-brands fa-spotify"></i>
+                                            </button>
+                                            <audio id="play">
+                                                <source src=${tracks.url} type="audio/mpeg">
+                                            </audio>
+                                        </div>
+                                </div>
+                                <div className="card-footer">
+                                    <p className="card-text">${tracks.artist}</p>
+                                    <button className="likes">
+                                        <img src="/ic_heart.svg" alt="">
+                                            <strong>0</strong>
+                                    </button>
+                                    <a href="" className="preview_url">재생하기</a>
+                                </div>
+                            </div>`
+
+                    $('#cards-box').append(selected_tracksList)
+                    console.log(response['selected_tracks'])
+                }
+            })
+        }
+
+
+    </script>
+
+    <script>
         const btns_like = document.querySelectorAll('.songs_time .card .likes')
 
         btns_like.forEach((item, index) => {
@@ -474,17 +523,16 @@
         })
     </script>
     <script>
-        $(document).ready(function () {
 
-            $('.popup_add_song').hide();
-            $("#select").on('click', function () {
-                $('.popup_add_song').show();
-            })
-
-            $('.popup_add_song .btn_close').on('click', function () {
-                $('.popup_add_song').hide();
-            })
+        $('.popup_add_song').hide();
+        $("#select").on('click', function () {
+            $('.popup_add_song').show();
         })
+
+        $('.popup_add_song .btn_close').on('click', function () {
+            $('.popup_add_song').hide();
+        })
+
     </script>
 
 </head>
