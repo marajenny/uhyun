@@ -71,21 +71,22 @@ def playlist_get():
 @app.route("/selected_tracks", methods=["POST"])
 def selected_track_get():
     selected_track_receive = request.form['select_track']
-    selected_track_data = db.search_results.find({"track": selected_track_receive})
+    print("selected_track_receive:", selected_track_receive)
+    selected_track_data = db.search_results.find({"attention": selected_track_receive})
     track_count = 0
-
 
     for track_data in selected_track_data:
         track_count += 1
         selected_track = {
-            "track": track_data["track"],
-            "artists": track_data["artists"],
-            "image": track_data["image"],
-            "url": track_data["url"],
-            "hour": track_data["hour"],
-            "count": track_count
+            'track': track_data['track'],
+            'artists': track_data['artists'],
+            'image': track_data['image'],
+            'url': track_data['url'],
+            'hour': track_data['hour'],
+            'count': track_count
         }
         db.selected_tracks.insert_one(selected_track)
+        print("selected_track:", selected_track)
 
     return 'OK'
 
