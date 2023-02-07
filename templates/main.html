@@ -318,7 +318,6 @@
 
     <script>
         $(document).ready(function () {
-            $('#discription').hide();
             $('#search_button').click(function (event) {
 
                 event.preventDefault();
@@ -370,6 +369,7 @@
 
     <script>
         $(document).ready(function () {
+            $('.popup_add_song').hide();
             getTracks()
         })
 
@@ -444,7 +444,6 @@
 
     </script>
     <script>
-
         function select_track(button) {
             let selected_track = $(button).closest(".card").find("#track_result").text();
             let selected_artists = $(button).closest(".card").find("#artists_result").text();
@@ -457,58 +456,64 @@
 
                 },
 
-            });
-        }
 
+            });
+
+            document.getElementById('popup').style.display = 'block';
+            let closeButton = document.getElementById("popupClose");
+            let popupWindow = document.getElementById("popup");
+            button.addEventListener("click", function () {
+                popupWindow.style.display = "block";
+            })
+            closeButton.addEventListener("click", function () {
+                popupWindow.style.display = "none";
+            })
+        }
     </script>
+
 
     <script>
         $(document).ready(function () {
-            selected_tracks();
-        });
-
-        function selected_tracks() {
-            $.ajax({
-                type: 'GET',
-                url: '/selected_tracks',
-                data: {},
-                success: function (response) {
-                    let tracks = response.track;
-                    let selected_tracksList = `<div className="col-sd-4">
-                            <div className="cards" id="songs_time">
-                                <div className="card">
-                                    <img src="${tracks.image}" alt="Track Image" style="height:100%;">
-                                        <div className="card-body">
-                                            <h5 className="card-title" id="selected_tracks">${tracks.track}</h5>
-                                            <p className="count">${tracks.count}명이 듣고 있어요</p>
+            function selected_tracks() {
+                $.ajax({
+                    type: 'GET',
+                    url: '/selected_tracks',
+                    data: {},
+                    success: function (response) {
+                        let selected_tracks = response.track;
+                        let selected_tracksList = `<div class="col-sd-4">
+                            <div class="cards" id="songs_time">
+                                <div classe="card">
+                                    <img src="${track.image}" alt="Track Image" style="height:100%;">
+                                        <div class="card-body">
+                                            <h5 class="card-title" id="selected_tracks">${track.track}</h5>
+                                            <p class="count">${track.count}명이 듣고 있어요</p>
                                         </div>
                                         <div>
                                             <button onClick="preview_play(this.nextElementSibling)"
                                                     style="border:0; outline:0; background-color:transparent;">
-                                                <i className="fa-brands fa-spotify"></i>
+                                                <i class="fa-brands fa-spotify"></i>
                                             </button>
                                             <audio id="play">
-                                                <source src=${tracks.url} type="audio/mpeg">
+                                                <source src=${track.url} type="audio/mpeg">
                                             </audio>
                                         </div>
                                 </div>
-                                <div className="card-footer">
-                                    <p className="card-text">${tracks.artist}</p>
-                                    <button className="likes">
+                                <div class="card-footer">
+                                    <p class="card-text">${track.artist}</p>
+                                    <button class="likes">
                                         <img src="/ic_heart.svg" alt="">
                                             <strong>0</strong>
                                     </button>
-                                    <a href="" className="preview_url">재생하기</a>
+                                    <a href="" class="preview_url">재생하기</a>
                                 </div>
                             </div>`
 
-                    $('#cards-box').append(selected_tracksList)
-                    console.log(response['selected_tracks'])
-                }
-            })
-        }
-
-
+                        $('#cards-box').append(selected_tracksList)
+                    }
+                });
+            }
+        })
     </script>
 
     <script>
@@ -522,18 +527,7 @@
             })
         })
     </script>
-    <script>
 
-        $('.popup_add_song').hide();
-        $("#select").on('click', function () {
-            $('.popup_add_song').show();
-        })
-
-        $('.popup_add_song .btn_close').on('click', function () {
-            $('.popup_add_song').hide();
-        })
-
-    </script>
 
 </head>
 
@@ -613,10 +607,10 @@
         </div>
     </div>
 
-    <div class="popup_add_song" style="display: none;">
+    <div class="popup_add_song" id="popup" style="display: none">
         <div class="contents">
             <button class="btn_close">
-                <img src="../img/ic_close.svg" alt="닫기버튼">
+                <img src="../img/ic_close.svg" id="popupClose" alt="닫기버튼">
             </button>
             <img src="../img/img_bibimbap.svg" alt="비빔밥 이미지">
             <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
