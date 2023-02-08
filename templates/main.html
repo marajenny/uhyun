@@ -139,7 +139,6 @@
             position: center;
             border-radius: 50px;
             border: 1px solid white;
-            background-color: rgba(0,0,0,0);
         }
 
         .carousel-item active{
@@ -258,7 +257,7 @@
         .songs_time .cards {
             grid-template-columns: repeat(5, 1fr);
             width: 100%;
-            max-height: 300px;
+            min-height: 300px;
             display: flex;
             gap: 12px;
             align-items: center;
@@ -267,12 +266,12 @@
             overflow: auto;
         }
 
-        .songs_time .cards. card {
+
+        .songs_time .cards  {
             width: 100%;
-            min-height: 150px;
-            align-content: center;
-            border: 0px;
+            height: 100%;
         }
+
 
         .songs_time .card .card-header {
             width: 100%;
@@ -520,7 +519,7 @@
                             <div class="cards" id="songs_time">
                                 <div classe="card">
                                     <div class="card-body">
-                                        <img src="${selected_track.image}" alt="Track Image" style="height:100%;">
+                                        <img src="${selected_track.image}" alt="Track Image" style="height:200px";>
                                             <h5 class="card-title" id="selected_tracks">${selected_track.track}</h5>
                                             <p class="count">${selected_track.count}명이 듣고 있어요</p>
                                     </div>
