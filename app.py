@@ -94,7 +94,8 @@ def selected_track_post():
                 'url': track_data['url'],
                 'hour': track_data['hour'],
                 'count': track_count,
-                'timestamp': track_data['timestamp']
+                'timestamp': track_data['timestamp'],
+                'trackID': track_data['trackID']
             }
             db.playlist.insert_one(selected_track)
 
@@ -107,9 +108,14 @@ def selected_track_post():
 
 @app.route("/playlist", methods=["GET"])
 def selected_track_get():
-    selected_track_list = list(db.playlist.find({}, {'_id': False}).sort([('timestamp', -1)]))
+    selected_track_list = list(db.playlist.find({}, {'_id': False}).sort([('timestamp', -1)]).distinct('trackID'))
+    unique_tracks = []
+    for track_id in selected_track_list:
+        track_data = db.playlist.find_one({'trackID': track_id}, {'_id': False})
+        unique_tracks.append(track_data)
 
-    return jsonify({'selected_track': selected_track_list})
+    return jsonify({'selected_track': unique_tracks})
+
 
 
 if __name__ == '__main__':
