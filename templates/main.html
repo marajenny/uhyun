@@ -94,7 +94,7 @@
         .carousel-container {
             margin: 0 auto;
 
-            min-height: 375px;
+            min-height: 330px;
             max-width: 1200px;
             width: 95%;
             margin-top: 70px;
@@ -455,11 +455,11 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
-                                                        <i class="fa-brands fa-spotify" ></i>
+                                                        <i class="fa-brands fa-spotify fa-2x" ></i>
                                                     </button>
                                                     <audio id="play">
                                                         <source id="preview_result" src=${track.url} type="audio/mpeg">
@@ -507,9 +507,7 @@
     <script>
         function popup_show() {
             document.getElementById('popup').style.display = 'block';
-            setTimeout(function () {
-                document.getElementById("popup").style.display = "none";
-            }, 2500);
+            setTimeout(function () { }, 4000);
         }
 
 
