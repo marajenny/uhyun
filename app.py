@@ -101,7 +101,6 @@ def selected_track_post():
 @app.route("/playlist", methods=["GET"])
 def selected_track_get():
     selected_track_list = list(db.playlist.find({}, {'_id': False}).sort([('timestamp', -1)]))
-    print("test", selected_track_list)
 
     return jsonify({'selected_track': selected_track_list})
 
