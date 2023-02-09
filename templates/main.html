@@ -250,7 +250,7 @@
             justify-content: center;
             width: 100%;
             height: auto;
-            margin-top: 450px;
+            margin-top: 500px;
         }
 
         .songs_time > h1 {
@@ -260,8 +260,8 @@
         }
 
         .songs_time .cards {
-            grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(5, minmax(200px, auto));
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(7, minmax(200px, auto));
             width: 100%;
             min-height: 300px;
             display: flex;
@@ -448,7 +448,7 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
@@ -717,7 +717,7 @@
         <h1>
             <b>오후 1시에는 이 노래들이 모이고 있어요!</b>
         </h1>
-        <div class="cards row row-cols-5" id="cards-box">
+        <div class="cards row row-cols-7" id="cards-box">
 
         </div>
     </div>
