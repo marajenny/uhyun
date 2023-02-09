@@ -511,12 +511,12 @@
                                 <div class="card-footer">
                                     <p class="card-text">${selected_artists}</p>
                                     <button class="likes">
-                                    <i class="fa-solid fa-heart fa-3x"></i>
+                                    <i class="fa-solid fa-heart fa-2x"></i>
                                         <strong>0</strong>
                                     </button>
                                      <button onClick="preview_play(this.nextElementSibling)"
                                                 style="border:0; outline:0; background-color:transparent;">
-                                            <i class="fa-brands fa-spotify fa-3x"></i>
+                                            <i class="fa-brands fa-spotify fa-2x"></i>
                                      </button>
                                      <audio id="play">
                                          <source src="${selected_preview}" type="audio/mpeg">
@@ -549,12 +549,12 @@
                             <div class="cards" id="songs_time">
                                 <div class="card">
                                     <div class="card-body">
-                                        <img src="${selected_track.image ? selected_track.image : ''}" alt="Track Image" style="height: 100%; width: 100%;">
+                                        <img src="${selected_track.image}" alt="Track Image" style="height: 100%; width: 100%;">
                                             <h5 class="card-title" id="selected_tracks">${selected_track.track}</h5>
                                             <p class="count">${selected_track.count}명이 듣고 있어요</p>
                                     </div>
                                     <div class="card-footer">
-                                        <p class="card-text">${selected_track.artist}</p>
+                                        <p class="card-text">${selected_track.artists}</p>
                                         <button class="likes">
                                         <i class="fa-solid fa-heart fa-2x"></i>
                                             <strong>0</strong>
