@@ -502,13 +502,9 @@
             document.getElementById('popup').style.display = 'block';
             setTimeout(function () {
                 document.getElementById("popup").style.display = "none";
-            }, 2000);
-            let closeButton = document.getElementById("popupClose");
-            let popupWindow = document.getElementById("popup");
-            closeButton.addEventListener("click", function () {
-                popupWindow.style.display = "none";
-            })
-        }
+            }, 2500);
+            }
+
 
         function select_track(button) {
             let selected_track = $(button).closest(".card").find("#track_result").text();
@@ -665,7 +661,7 @@
 
                     <br>
                     <img id="description"
-                         src="/static/description_img.png"
+                         src="/static/img/description_img.png"
                          style="display: none; margin:15px; min-width: 288px; max-width: 75%; ">
                 </center>
             </div>
@@ -704,9 +700,6 @@
 
     <div class="popup_add_song" id="popup" style="display: none;">
         <div class="contents">
-            <button class="btn_close" id="popupClose">
-                <i class="fa-solid fa-x"></i>
-            </button>
             <i class="fa-solid fa-bowl-food fa-9x" style="margin: 10px;"></i>
             <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
         </div>
