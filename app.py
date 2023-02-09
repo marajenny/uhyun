@@ -1,3 +1,6 @@
+from pymongo import MongoClient
+import certifi
+
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 
@@ -7,8 +10,7 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-from pymongo import MongoClient
-import certifi
+
 
 ca = certifi.where()
 
@@ -30,13 +32,14 @@ def home():
 @app.route("/search_results", methods=["POST"])
 def search_results():
     track_input_receive = request.form['track_input']
-    track_search = sp.search(q=track_input_receive, limit=10, type='track', market=None)
+    track_search = sp.search(q=track_input_receive, limit=20, type='track', market=None)
 
     tracks = []
+    track_ids = set()
 
     for track in track_search['tracks']['items']:
         track_results = track['name']
-        trackId_results = track['id']
+        trackid_results = track['id']
         artist_results = [artist['name'] for artist in track['artists']]
         image_results = next(
             (image['url'] for image in track['album']['images'] if image['height'] == 640 and image['width'] == 640),
@@ -56,14 +59,15 @@ def search_results():
             'date': date_input.strftime('%Y-%m-%d'),
             'hour': int(hour_input),
             'timestamp': int(timestamp_input),
-            'trackID': trackId_results}
+            'trackID': trackid_results}
 
-        trackId_in_tracks = [t['trackID'] for t in tracks]
-        if trackId_results not in trackId_in_tracks:
+        if trackid_results not in track_ids:
             tracks.append(track_result)
+            track_ids.add(trackid_results)
             db.search_results.insert_one(track_result)
 
     return 'OK'
+
 
 
 @app.route("/search_results", methods=["GET"])
@@ -77,16 +81,12 @@ def selected_track_post():
     selected_track_receive = request.form['select_track']
     selected_artists_receive = request.form['select_artists']
     existing_track = db.playlist.find_one({"track": selected_track_receive, "artists": selected_artists_receive})
-    print(selected_track_receive, selected_artists_receive)
-    if existing_track:
-        db.playlist.update_one({"track": selected_track_receive, "artists": selected_artists_receive},
-                               {"$inc": {"count": 1}})
-    else:
-        selected_track_data = db.search_results.find({"track": selected_track_receive, "artists": selected_artists_receive})
-        track_count = 0
-
+    print(existing_track)
+    if existing_track is None:
+        selected_track_data = db.search_results.find(
+            {"track": selected_track_receive, "artists": selected_artists_receive})
+        track_count = 1
         for track_data in selected_track_data:
-            track_count += 1
             selected_track = {
                 'track': track_data['track'],
                 'artists': track_data['artists'],
@@ -98,14 +98,16 @@ def selected_track_post():
             }
             db.playlist.insert_one(selected_track)
 
-    return 'OK'
+    else:
+        db.playlist.update_one({"track": selected_track_receive, "artists": selected_artists_receive},
+                               {"$inc": {"count": 1}})
 
+    return 'OK'
 
 
 @app.route("/playlist", methods=["GET"])
 def selected_track_get():
     selected_track_list = list(db.playlist.find({}, {'_id': False}).sort([('timestamp', -1)]))
-    print("test", selected_track_list)
 
     return jsonify({'selected_track': selected_track_list})
 
