@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -22,7 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--스타일 시트 연결/커밋테스트-->
-    <link rel="stylesheet" href="./main_style.css">
+    <link rel="stylesheet" href="./static/css/main_style.css">
 
     <title>Playlist Bibimbap</title>
 
@@ -43,6 +43,7 @@
             background: none;
             border: none;
         }
+
 
         .cover {
             clear: both;
@@ -81,21 +82,17 @@
             height: 100%;
             align-items: center;
             vertical-align: middle;
+
+
         }
 
-        .btn btn-outline-dark {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
 
         .carousel-container {
             margin: 0 auto;
 
             min-height: 375px;
-            max-width: 1200px;
-            width: 95%;
+            width: 1200px;
+            width: 95%
             margin-top: 10px;
             background-color: #fcc221;
             text-align: center;
@@ -135,6 +132,7 @@
             min-height: 150px;
             max-height: 150px;
             align-content: center;
+            margin: 5px;
         }
 
         .carousel-item > button {
@@ -144,8 +142,7 @@
             border-radius: 50px;
             border: 1px solid white;
         }
-
-        .carousel-item active{
+.carousel-item active{
             width: 100%;
             min-height: 150px;
             max-height: 100%;
@@ -197,7 +194,6 @@
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-
 
         .popup_add_song {
             position: fixed;
@@ -255,12 +251,12 @@
         .songs_time > h1 {
             font-size: 32px;
             text-align: center;
-            padding: 58px 0 32px 50px;
+            padding: 58px 0 32px 0px;
         }
 
         .songs_time .cards {
             grid-template-columns: repeat(5, 1fr);
-            grid-template-rows: repeat(5, minmax(200px, auto));
+            grid-template-rows: repeat(5, minmax(200px, auto))
             width: 100%;
             min-height: 300px;
             display: flex;
@@ -271,12 +267,12 @@
             overflow: auto;
         }
 
-
-        .songs_time .cards  {
+        .songs_time .card {
             width: 100%;
-            height: 100%;
+            min-height: 150px;
+            align-content: center;
+            border: 0px;
         }
-
 
         .songs_time .card .card-header {
             width: 100%;
@@ -320,6 +316,8 @@
             -webkit-line-clamp : 0;
         }
 
+
+
         .songs_time .card .card-footer {
             border: 0px;
             background-color: #fff;
@@ -349,6 +347,7 @@
 
     </style>
 
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script>
         function description_show() {
@@ -443,18 +442,18 @@
                         let tracksList = `
                                 <div class="col-sd-4">
                                     <div class="card">
-                                        <img src="${track.image}" alt="Track Image" style="height:100%;">
+                                        <img id="image_result" src="${track.image}" alt="Track Image" style="height:100%;">
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
-                                                        <i class="fa-brands fa-spotify fa-2x" ></i>
+                                                        <i class="fa-brands fa-spotify" ></i>
                                                     </button>
                                                     <audio id="play">
-                                                        <source src=${track.url} type="audio/mpeg">
+                                                        <source id="preview_result" src=${track.url} type="audio/mpeg">
                                                     </audio>
                                                 </div>
                                                 <p class="card-text" id="artists_result">${track.artists}</p>
@@ -469,18 +468,18 @@
                         let tracksList = `
                                 <div class="col-sd-4">
                                     <div class="card">
-                                        <img src="${track.image}" alt="Track Image" style="height:100%;">
+                                        <img id="image_result" src="${track.image}"  alt="Track Image" style="height:100%;">
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
                                                     <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
-                                                    <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                                    <button  onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
                                                         <i class="fa-brands fa-spotify fa-2x" ></i>
                                                     </button>
                                                     <audio id="play">
-                                                        <source src=${track.url} type="audio/mpeg">
+                                                        <source id="preview_result" src=${track.url} type="audio/mpeg">
                                                     </audio>
                                                 </div>
                                                 <p class="card-text" id="artists_result">${track.artists}</p>
@@ -497,62 +496,97 @@
 
     </script>
     <script>
+        function select_track() {
+            document.getElementById('popup').style.display = 'block';
+            let closeButton = document.getElementById("popupClose");
+            let popupWindow = document.getElementById("popup");
+            closeButton.addEventListener("click", function () {
+                popupWindow.style.display = "none";
+            })
+        }
+
         function select_track(button) {
             let selected_track = $(button).closest(".card").find("#track_result").text();
             let selected_artists = $(button).closest(".card").find("#artists_result").text();
+            let selected_image = $(button).closest(".card").find("#image_result").attr("src");
+            let selected_preview = $(button).closest(".card").find("#preview_result").attr("src");
+            let count = $(button).closest(".card").data("count") || 0;
+            count += 1;
+            $(button).closest(".card").data("count", count);
+            console.log(selected_track, selected_artists, selected_image, selected_preview)
 
             $.ajax({
                 type: "POST",
-                url: "/selected_tracks",
+                url: "/playlist",
                 data: {'select_track': selected_track, 'select_artists': selected_artists},
                 success: function (response) {
 
                 },
             });
 
-            document.getElementById('popup').style.display = 'block';
-            let closeButton = document.getElementById("popupClose");
-            let popupWindow = document.getElementById("popup");
-            button.addEventListener("click", function () {
-                popupWindow.style.display = "block";
-            })
-            closeButton.addEventListener("click", function () {
-                popupWindow.style.display = "none";
-            })
+            let selectedTrack = `<div class="col">
+                        <div class="cards" id="songs_time">
+                            <div classe="card">
+                                <div class="card-body">
+                                    <img src="${selected_image}" alt="Track Image" style="height: 100%; width: 100%;"">
+                                        <h5 class="card-title" id="selected_tracks">${selected_track}</h5>
+                                        <p class="count">${count}명이 듣고 있어요</p>
+                                </div>
+                                <div class="card-footer">
+                                    <p class="card-text">${selected_artists}</p>
+                                    <button class="likes">
+                                    <i class="fa-solid fa-heart fa-3x"></i>
+                                        <strong>0</strong>
+                                    </button>
+                                     <button onClick="preview_play(this.nextElementSibling)"
+                                                style="border:0; outline:0; background-color:transparent;">
+                                            <i class="fa-brands fa-spotify fa-3x"></i>
+                                     </button>
+                                     <audio id="play">
+                                         <source src="${selected_preview}" type="audio/mpeg">
+                                     </audio>
+                                </div>
+                            </div>
+                        </div>`
+
+            $('#cards-box').prepend(selectedTrack)
         }
+
     </script>
+
 
     <script>
         $(document).ready(function () {
-            selected_trackLists();
+            selected_playlist();
         });
 
-        function selected_trackLists() {
+        function selected_playlist() {
             $.ajax({
                 type: 'GET',
-                url: '/selected_tracks',
+                url: '/playlist',
                 data: {},
                 success: function (response) {
                     let selectedTracks = response.selected_track;
-                    let top1Track = selectedTracks.slice(0, 1);
-                    top1Track.forEach(function (selected_track) {
-                        let selected_trackList = `<div class="col-sd-4">
+                    selectedTracks.sort((a, b) => b.timestamp - a.timestamp);
+                    selectedTracks.forEach(function (selected_track) {
+                        let selected_trackList = `<div class="col">
                             <div class="cards" id="songs_time">
-                                <div classe="card">
+                                <div class="card">
                                     <div class="card-body">
-                                        <img src="${selected_track.image}" alt="Track Image" style="height:200px";>
-                                            <h5 class="card-title" id="selected_tracks" style="width:160px">"${selected_track.track}"</h5>
+                                        <img src="${selected_track.image ? selected_track.image : ''}" alt="Track Image" style="height: 100%; width: 100%;">
+                                            <h5 class="card-title" id="selected_tracks">${selected_track.track}</h5>
                                             <p class="count">${selected_track.count}명이 듣고 있어요</p>
                                     </div>
                                     <div class="card-footer">
                                         <p class="card-text">${selected_track.artist}</p>
                                         <button class="likes">
-                                        <i class="fa-solid fa-heart fa-3x"></i>
+                                        <i class="fa-solid fa-heart fa-2x"></i>
                                             <strong>0</strong>
                                         </button>
+
                                          <button onClick="preview_play(this.nextElementSibling)"
-                                                    style="border:0; outline:0; background-color:transparent;">
-                                                <i class="fa-brands fa-spotify fa-3x"></i>
+                                                    style="border:0; outline:0; background-color:transparent; margin-left: 5px; ">
+                                                <i class="fa-brands fa-spotify fa-2x"></i>
                                          </button>
                                          <audio id="play">
                                              <source src=${selected_track.url} type="audio/mpeg">
@@ -561,9 +595,9 @@
                                 </div>
                             </div>`
 
-                        $('#cards-box').prepend(selected_trackList)
-                    })
-                },
+                        $('#cards-box').append(selected_trackList)
+                    });
+                }
             })
         }
 
@@ -585,99 +619,107 @@
 </head>
 
 <body>
+<!-- 상단 커버(심소연님) -->
 
-    <div class="allpage">
-        <!-- 상단 커버(심소연님) -->
-        <div class="cover">
-            <div class="cover_bibimbap">
-                <button onclick="window.location.reload()" style="background-color: transparent; border: 0;outline:0;"><b>Playlist
-                    Bibimbap</b>
+
+<div class="cover">
+
+    <div class="cover_bibimbap">
+        <button onclick="window.location.reload()" style="background-color: transparent; border: 0;outline:0;"><b>Playlist
+            Bibimbap</b>
+        </button>
+    </div>
+    <div class="cover_title">
+        <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
+
+    </div>
+    <div class="input-group mb-3" style="width: 60%; min-width:200px; align-self: center; margin-top: 20px;">
+        <input id="track" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!">
+
+        <button class="btn btn-dark" type="submit" id="search_button" onclick="spotify_search()">
+            <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
+        </button>
+
+    </div>
+
+
+    <div class="box clearfix">
+
+
+        <div id="landingContainer" class="landing" style="justify-content: center;">
+            <center>
+                <button type="button" class="btn btn-outline-dark" id="description_button"
+                        onclick="description_show()"
+                        style="min-width: 180px; justify-self: right; border-radius: 20px; margin-top: 15px;">
+                    <i class="fa-solid fa-spoon"></i>
+                    Playlist Bibimbap이 무엇인가요?
+                    <i class="fa-solid fa-spoon"></i>
                 </button>
-            </div>
-            <div class="cover_title">
-                <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
 
-            </div>
-            <div class="input-group mb-3" style="width: 60%; min-width:200px; align-self: center; margin-top: 20px;">
-                <input id="track" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!">
-
-                <button class="btn btn-dark" type="submit" id="search_button" onclick="spotify_search()">
-                    <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
-                </button>
-
-            </div>
-
-            <div class="box clearfix">
-
-
-                <div id="landingContainer" class="landing" style="justify-content: center;">
-                    <center>
-                        <button type="button" class="btn btn-outline-dark" id="description_button"
-                                onclick="description_show()"
-                                style="min-width: 180px; justify-self: right; border-radius: 20px; margin-top: 15px;">
-                            <i class="fa-solid fa-spoon"></i>
-                            Playlist Bibimbap이 무엇인가요?
-                            <i class="fa-solid fa-spoon"></i>
-                        </button>
-
-                        <br>
-                        <img id="description"
-                             src="/static/description.png"
-                             style="display: none; margin:15px; min-width: 288px; max-width: 75%; ">
-                    </center>
-                </div>
-            </div>
+                <br>
+                <img id="description"
+                     src="./static/img/description_img.png"
+                     style="display: none; margin:15px; min-width: 288px; max-width: 75%; ">
+            </center>
         </div>
+    </div>
 
-        <!-- 슬라이드(박드림님)-->
-        <div class="carousel-container">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="container-fluid">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-first">
+    <!-- 슬라이드(박드림님)-->
+    <div class="carousel-container">
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="container-fluid">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-first">
 
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-second">
-
-                                </div>
-                            </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                                data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-second">
+
+                        </div>
                     </div>
                 </div>
-            </div>
-
-        <!--팝업 창-->
-        <div class="popup_add_song" id="popup" style="display: none;">
-            <div class="contents">
-                <button class="btn_close" id="popupClose" onclick="selected_trackLists()">
-                    <i class="fa-solid fa-x"></i>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
                 </button>
-                <i class="fa-solid fa-bowl-food fa-9x" style="margin: 10px;"></i>
-                <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
-            </div>
-        </div>
-
-        <!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
-        <div class="songs_time">
-            <h1>
-                <b>오후 1시에는 이 노래들이 모이고 있어요!</b>
-            </h1>
-            <div class="cards row row-cols-5" id="cards-box">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
         </div>
     </div>
+
+    <div class="popup_add_song" id="popup" style="display: none;">
+        <div class="contents">
+            <button class="btn_close" id="popupClose">
+                <i class="fa-solid fa-x"></i>
+            </button>
+            <i class="fa-solid fa-bowl-food fa-9x" style="margin: 10px;"></i>
+            <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
+        </div>
+    </div>
+
+
+    <!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
+
+
+    <div class="songs_time">
+        <h1>
+            <b>오후 1시에는 이 노래들이 모이고 있어요!</b>
+        </h1>
+        <div class="cards row row-cols-5" id="cards-box">
+
+        </div>
+    </div>
+</div>
+
+</div>
+
+
 </body>
 </html>
