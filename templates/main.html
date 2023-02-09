@@ -44,6 +44,18 @@
             border: none;
         }
 
+        body {
+            margin:0;
+        }
+
+        /*.allpage {
+            position:absolute;
+            display:table;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%
+        }*/
 
         .cover {
             clear: both;
@@ -129,7 +141,7 @@
         .carousel-item {
             width: 100%;
             min-height: 150px;
-            max-height: 100%;
+            max-height: 150px;
             align-content: center;
         }
 
@@ -139,7 +151,6 @@
             position: center;
             border-radius: 50px;
             border: 1px solid white;
-            background-color: rgba(0,0,0,0);
         }
 
         .carousel-item active{
@@ -257,9 +268,9 @@
 
         .songs_time .cards {
             grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, minmax(200px, auto));
             width: 100%;
-            min-height: 150px;
-            max-height: 100%;
+            min-height: 300px;
             display: flex;
             gap: 12px;
             align-items: center;
@@ -268,17 +279,13 @@
             overflow: auto;
         }
 
-        .songs_time .card {
+
+        .songs_time .cards  {
             width: 100%;
-            min-height: 150px;
-            align-content: center;
-            border: 0px;
+            height: 100%;
         }
 
-        .songs_time.cards {
-            width: 150px;
-            height: 300px;
-        }
+
         .songs_time .card .card-header {
             width: 100%;
             height: 177px;
@@ -299,11 +306,26 @@
         .songs_time .card .card-body .track {
             font-size: 18px;
             font-weight: 900;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .songs_time .card .card-body .count {
             font-size: 14px;
             font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .songs_time .card .card-body .card-title {
+            font-size: 14px;
+            font-weight: 700;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            -webkit-line-clamp : 0;
         }
 
         .songs_time .card .card-footer {
@@ -322,6 +344,9 @@
             width: 50%;
             font-weight: 600;
             opacity: 60%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
 
@@ -525,8 +550,8 @@
                             <div class="cards" id="songs_time">
                                 <div classe="card">
                                     <div class="card-body">
-                                        <img src="${selected_track.image}" alt="Track Image" style="height:100%;">
-                                            <h5 class="card-title" id="selected_tracks">${selected_track.track}</h5>
+                                        <img src="${selected_track.image}" alt="Track Image" style="height:200px";>
+                                            <h5 class="card-title" id="selected_tracks" style="width:160px">"${selected_track.track}"</h5>
                                             <p class="count">${selected_track.count}명이 듣고 있어요</p>
                                     </div>
                                     <div class="card-footer">
@@ -572,103 +597,100 @@
 <body>
 <!-- 상단 커버(심소연님) -->
 
-<div>
-    <div class="cover">
-        <div class="cover_bibimbap">
-            <button onclick="window.location.reload()" style="background-color: transparent; border: 0;outline:0;"><b>Playlist
-                Bibimbap</b>
-            </button>
-        </div>
-        <div class="cover_title">
-            <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
-
-        </div>
-        <div class="input-group mb-3" style="width: 60%; min-width:200px; align-self: center; margin-top: 20px;">
-            <input id="track" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!">
-
-            <button class="btn btn-dark" type="submit" id="search_button" onclick="spotify_search()">
-                <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
-            </button>
-
-        </div>
-
-        <div class="box clearfix">
-
-
-            <div id="landingContainer" class="landing" style="justify-content: center;">
-                <center>
-                    <button type="button" class="btn btn-outline-dark" id="description_button"
-                            onclick="description_show()"
-                            style="min-width: 180px; justify-self: right; border-radius: 20px; margin-top: 15px;">
-                        <i class="fa-solid fa-spoon"></i>
-                        Playlist Bibimbap이 무엇인가요?
-                        <i class="fa-solid fa-spoon"></i>
-                    </button>
-
-                    <br>
-                    <img id="description"
-                         src="/static/description.png"
-                         style="display: none; margin:15px; min-width: 288px; max-width: 75%; ">
-                </center>
+    <div class="allpage">
+        <div class="cover">
+            <div class="cover_bibimbap">
+                <button onclick="window.location.reload()" style="background-color: transparent; border: 0;outline:0;"><b>Playlist
+                    Bibimbap</b>
+                </button>
             </div>
-        </div>
+            <div class="cover_title">
+                <h1><b>지금 듣고 있는 노래<br>모아모아 함께 들어요!</b></h1>
 
-        <!-- 슬라이드(박드림님)-->
-        <div class="carousel-container">
-            <div id="carouselExampleIndicators" class="carousel slide">
-                <div class="container-fluid">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-first">
+            </div>
+            <div class="input-group mb-3" style="width: 60%; min-width:200px; align-self: center; margin-top: 20px;">
+                <input id="track" type="text" class="form-control" placeholder="지금 듣고 있는 노래를 검색해 노래를 모아보세요!">
 
+                <button class="btn btn-dark" type="submit" id="search_button" onclick="spotify_search()">
+                    <i class="fa-solid fa-magnifying-glass" style="color:white;"></i>
+                </button>
+
+            </div>
+
+            <div class="box clearfix">
+
+
+                <div id="landingContainer" class="landing" style="justify-content: center;">
+                    <center>
+                        <button type="button" class="btn btn-outline-dark" id="description_button"
+                                onclick="description_show()"
+                                style="min-width: 180px; justify-self: right; border-radius: 20px; margin-top: 15px;">
+                            <i class="fa-solid fa-spoon"></i>
+                            Playlist Bibimbap이 무엇인가요?
+                            <i class="fa-solid fa-spoon"></i>
+                        </button>
+
+                        <br>
+                        <img id="description"
+                             src="/static/description.png"
+                             style="display: none; margin:15px; min-width: 288px; max-width: 75%; ">
+                    </center>
+                </div>
+            </div>
+
+            <!-- 슬라이드(박드림님)-->
+            <div class="carousel-container">
+                <div id="carouselExampleIndicators" class="carousel slide">
+                    <div class="container-fluid">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-first">
+
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-second">
+
+                                </div>
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <div class="row row-cols-1 row-cols-md-5 g-1" id="carousel-second">
-
-                            </div>
-                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                            data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="popup_add_song" id="popup" style="display: none;">
-        <div class="contents">
-            <button class="btn_close" id="popupClose" onclick="selected_trackLists()">
-                <i class="fa-solid fa-x"></i>
-            </button>
-            <i class="fa-solid fa-bowl-food fa-9x" style="margin: 10px;"></i>
-            <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
+        <div class="popup_add_song" id="popup" style="display: none;">
+            <div class="contents">
+                <button class="btn_close" id="popupClose" onclick="selected_trackLists()">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+                <i class="fa-solid fa-bowl-food fa-9x" style="margin: 10px;"></i>
+                <p><strong>Playlist</strong> 비빔밥에 노래가 담겼어요.</p>
+            </div>
+        </div>
+
+
+        <!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
+
+
+        <div class="songs_time">
+            <h1>
+                <b>오후 1시에는 이 노래들이 모이고 있어요!</b>
+            </h1>
+            <div class="cards row row-cols-5" id="cards-box">
+
+            </div>
         </div>
     </div>
-
-
-    <!-- 하단 시간별 노래(곽부미님), 좋아요 재생하기(박우현님)-->
-
-
-    <div class="songs_time">
-        <h1>
-            <b>오후 1시에는 이 노래들이 모이고 있어요!</b>
-        </h1>
-        <div class="cards" id="cards-box">
-
-        </div>
-    </div>
-</div>
-
-
-
 </body>
 </html>
