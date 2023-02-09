@@ -10,8 +10,6 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-
-
 ca = certifi.where()
 
 client = MongoClient(
@@ -69,7 +67,6 @@ def search_results():
     return 'OK'
 
 
-
 @app.route("/search_results", methods=["GET"])
 def playlist_get():
     playlist = list(db.search_results.find({}, {'_id': False}).sort([('timestamp', -1)]).limit(10))
@@ -81,7 +78,7 @@ def selected_track_post():
     selected_track_receive = request.form['select_track']
     selected_artists_receive = request.form['select_artists']
     existing_track = db.playlist.find_one({"track": selected_track_receive, "artists": selected_artists_receive})
-    print(existing_track)
+
     if existing_track is None:
         selected_track_data = db.search_results.find(
             {"track": selected_track_receive, "artists": selected_artists_receive})
@@ -108,14 +105,13 @@ def selected_track_post():
 
 @app.route("/playlist", methods=["GET"])
 def selected_track_get():
-    selected_track_list = list(db.playlist.find({}, {'_id': False}).sort([('timestamp', -1)]).distinct('trackID'))
+    selected_track_id = list(db.playlist.find({}, {'_id': False}).sort([('timestamp', -1)]).distinct('trackID'))
     unique_tracks = []
-    for track_id in selected_track_list:
+    for track_id in selected_track_id:
         track_data = db.playlist.find_one({'trackID': track_id}, {'_id': False})
         unique_tracks.append(track_data)
 
     return jsonify({'selected_track': unique_tracks})
-
 
 
 if __name__ == '__main__':
