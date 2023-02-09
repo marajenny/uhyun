@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -119,8 +119,8 @@
 
         .carousel-inner {
             display: flex;
-            width: 95%;
-            max-width-wrapper: 1200px;
+            width: 70%;
+            max-width-wrapper: 1400px;
 
             height: 300px;
             min-height: 100px;
@@ -147,14 +147,14 @@
             border: 1px solid white;
         }
 
-        .carousel-item active{
+        .carousel-item active {
             width: 100%;
             min-height: 150px;
             max-height: 100%;
             align-content: center;
         }
 
-        .carousel-item active> button {
+        .carousel-item active > button {
             width: 100%;
             height: 100%;
             position: center;
@@ -251,7 +251,7 @@
             justify-content: center;
             width: 100%;
             height: auto;
-            margin-top: 500px;
+            margin-top: 450px;
         }
 
         .songs_time > h1 {
@@ -325,7 +325,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            -webkit-line-clamp : 0;
+            -webkit-line-clamp: 0;
         }
 
         .songs_time .card .card-footer {
@@ -510,7 +510,7 @@
             setTimeout(function () {
                 document.getElementById("popup").style.display = "none";
             }, 2500);
-            }
+        }
 
 
         function select_track(button) {
@@ -518,9 +518,7 @@
             let selected_artists = $(button).closest(".card").find("#artists_result").text();
             let selected_image = $(button).closest(".card").find("#image_result").attr("src");
             let selected_preview = $(button).closest(".card").find("#preview_result").attr("src");
-            let count = $(button).closest(".card").data("count") || 0;
-            count += 1;
-            $(button).closest(".card").data("count", count);
+
             console.log(selected_track, selected_artists, selected_image, selected_preview)
 
             $.ajax({
@@ -565,7 +563,6 @@
 
     <script>
         $(document).ready(function () {
-            $('#cards-box').empty();
             selected_trackLists();
         });
 
@@ -575,8 +572,6 @@
                 url: '/playlist',
                 data: {},
                 success: function (response) {
-
-                    console.log(response)
                     let selectedTracks = response.selected_track;
                     selectedTracks.sort((a, b) => b.timestamp - a.timestamp);
                     selectedTracks.forEach(function (selected_track) {
@@ -590,7 +585,7 @@
                                     </div>
                                     <div class="card-footer">
                                         <p class="card-text">${selected_track.artists}</p>
-                                        <button class="likes">
+                                        <button id="like" class="likes">
                                         <i class="fa-solid fa-heart fa-2x"></i>
                                             <strong>0</strong>
                                         </button>
@@ -604,9 +599,10 @@
                                          </audio>
                                     </div>
                                 </div>
-                            </div>`
+                            </div>
+                        </div>`
 
-                        $('#cards-box').append(selected_trackList)
+                        $('#cards-box').prepend(selected_trackList)
                     });
                 }
             })
@@ -615,7 +611,7 @@
     </script>
 
     <script>
-        const btns_like = document.querySelectorAll('.songs_time .card .likes')
+        const btns_like = document.getElementById('like')
 
         btns_like.forEach((item, index) => {
             item.addEventListener('click', function () {
@@ -624,7 +620,7 @@
                 item.children[1].innerText = count
             })
         })
-    </script>
+   </script>
 
 
 </head>
@@ -723,8 +719,6 @@
 
         </div>
     </div>
-</div>
-
 </div>
 
 
