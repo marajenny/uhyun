@@ -24,7 +24,7 @@ sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
 @app.route('/')
 def home():
-    return render_template('main.html')
+    return render_template('index.html')
 
 
 @app.route("/search_results", methods=["POST"])
