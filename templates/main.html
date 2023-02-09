@@ -496,43 +496,45 @@
                 url: "/playlist",
                 data: {'select_track': selected_track, 'select_artists': selected_artists},
                 success: function (response) {
-
                 },
             });
-
-            let selectedTrack = `<div class="col">
-                        <div class="cards" id="songs_time">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="${selected_image}" alt="Track Image" style="height: 100%; width: 100%;"">
-                                        <h5 class="card-title" id="selected_tracks">${selected_track}</h5>
-                                        <p class="count">${count}명이 듣고 있어요</p>
-                                </div>
-                                <div class="card-footer">
-                                    <p class="card-text">${selected_artists}</p>
-                                    <button class="likes">
-                                    <i class="fa-solid fa-heart fa-2x"></i>
-                                        <strong>0</strong>
-                                    </button>
-                                     <button onClick="preview_play(this.nextElementSibling)"
-                                                style="border:0; outline:0; background-color:transparent;">
-                                            <i class="fa-brands fa-spotify fa-2x"></i>
-                                     </button>
-                                     <audio id="play">
-                                         <source src="${selected_preview}" type="audio/mpeg">
-                                     </audio>
-                                </div>
-                            </div>
-                        </div>`
-
-            $('#cards-box').prepend(selectedTrack)
+            window.location.reload()
         }
+
+        /*let selectedTrack = `<div class="col">
+                    <div class="cards" id="songs_time">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="${selected_image}" alt="Track Image" style="height: 100%; width: 100%;"">
+                                    <h5 class="card-title" id="selected_tracks">${selected_track}</h5>
+                                    <p class="count">${count}명이 듣고 있어요</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text">${selected_artists}</p>
+                                <button class="likes">
+                                <i class="fa-solid fa-heart fa-2x"></i>
+                                    <strong>0</strong>
+                                </button>
+                                 <button onClick="preview_play(this.nextElementSibling)"
+                                            style="border:0; outline:0; background-color:transparent;">
+                                        <i class="fa-brands fa-spotify fa-2x"></i>
+                                 </button>
+                                 <audio id="play">
+                                     <source src="${selected_preview}" type="audio/mpeg">
+                                 </audio>
+                            </div>
+                        </div>
+                    </div>`
+
+        $('#cards-box').prepend(selectedTrack)*/
+
 
     </script>
 
 
     <script>
         $(document).ready(function () {
+            $('#cards-box').empty();
             selected_playlist();
         });
 
@@ -542,6 +544,8 @@
                 url: '/playlist',
                 data: {},
                 success: function (response) {
+
+                    console.log(response)
                     let selectedTracks = response.selected_track;
                     selectedTracks.sort((a, b) => b.timestamp - a.timestamp);
                     selectedTracks.forEach(function (selected_track) {
