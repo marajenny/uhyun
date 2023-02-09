@@ -73,16 +73,12 @@ def selected_track_post():
     selected_track_receive = request.form['select_track']
     selected_artists_receive = request.form['select_artists']
     existing_track = db.playlist.find_one({"track": selected_track_receive, "artists": selected_artists_receive})
-    print(selected_track_receive, selected_artists_receive)
-    if existing_track:
-        db.playlist.update_one({"track": selected_track_receive, "artists": selected_artists_receive},
-                               {"$inc": {"count": 1}})
-    else:
-        selected_track_data = db.search_results.find({"track": selected_track_receive, "artists": selected_artists_receive})
-        track_count = 0
-
+    print(existing_track)
+    if existing_track == None:
+        selected_track_data = db.search_results.find(
+            {"track": selected_track_receive, "artists": selected_artists_receive})
+        track_count = 1
         for track_data in selected_track_data:
-            track_count += 1
             selected_track = {
                 'track': track_data['track'],
                 'artists': track_data['artists'],
@@ -94,14 +90,16 @@ def selected_track_post():
             }
             db.playlist.insert_one(selected_track)
 
-    return 'OK'
+    else:
+        db.playlist.update_one({"track": selected_track_receive, "artists": selected_artists_receive},
+                               {"$inc": {"count": 1}})
 
+    return 'OK'
 
 
 @app.route("/playlist", methods=["GET"])
 def selected_track_get():
     selected_track_list = list(db.playlist.find({}, {'_id': False}).sort([('timestamp', -1)]))
-    print("test", selected_track_list)
 
     return jsonify({'selected_track': selected_track_list})
 

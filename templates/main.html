@@ -447,7 +447,8 @@
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
+                                                    
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
@@ -497,6 +498,15 @@
 
     </script>
     <script>
+        function popup_show() {
+            document.getElementById('popup').style.display = 'block';
+            let closeButton = document.getElementById("popupClose");
+            let popupWindow = document.getElementById("popup");
+            closeButton.addEventListener("click", function () {
+                popupWindow.style.display = "none";
+            })
+        }
+
         function select_track(button) {
             let selected_track = $(button).closest(".card").find("#track_result").text();
             let selected_artists = $(button).closest(".card").find("#artists_result").text();
@@ -506,33 +516,54 @@
                 url: "/selected_tracks",
                 data: {'select_track': selected_track, 'select_artists': selected_artists},
                 success: function (response) {
-
                 },
             });
-
-            document.getElementById('popup').style.display = 'block';
-            let closeButton = document.getElementById("popupClose");
-            let popupWindow = document.getElementById("popup");
-            button.addEventListener("click", function () {
-                popupWindow.style.display = "block";
-            })
-            closeButton.addEventListener("click", function () {
-                popupWindow.style.display = "none";
-            })
+            window.location.reload()
         }
+
+
+        /*let selectedTrack = `<div class="col">
+                    <div class="cards" id="songs_time">
+                        <div class="card">
+                            <div class="card-body">
+                                <img src="${selected_image}" alt="Track Image" style="height: 100%; width: 100%;"">
+                                    <h5 class="card-title" id="selected_tracks">${selected_track}</h5>
+                                    <p class="count">${count}명이 듣고 있어요</p>
+                            </div>
+                            <div class="card-footer">
+                                <p class="card-text">${selected_artists}</p>
+                                <button class="likes">
+                                <i class="fa-solid fa-heart fa-2x"></i>
+                                    <strong>0</strong>
+                                </button>
+                                 <button onClick="preview_play(this.nextElementSibling)"
+                                            style="border:0; outline:0; background-color:transparent;">
+                                        <i class="fa-brands fa-spotify fa-2x"></i>
+                                 </button>
+                                 <audio id="play">
+                                     <source src="${selected_preview}" type="audio/mpeg">
+                                 </audio>
+                            </div>
+                        </div>
+                    </div>`
+
+        $('#cards-box').prepend(selectedTrack)*/
+       
     </script>
 
     <script>
         $(document).ready(function () {
+            $('#cards-box').empty();
             selected_trackLists();
         });
-
         function selected_trackLists() {
             $.ajax({
                 type: 'GET',
                 url: '/selected_tracks',
                 data: {},
                 success: function (response) {
+
+                    console.log(response)
                     let selectedTracks = response.selected_track;
                     let top1Track = selectedTracks.slice(0, 1);
                     top1Track.forEach(function (selected_track) {
@@ -540,12 +571,12 @@
                             <div class="cards" id="songs_time">
                                 <div classe="card">
                                     <div class="card-body">
-                                        <img src="${selected_track.image}" alt="Track Image" style="height:200px";>
-                                            <h5 class="card-title" id="selected_tracks" style="width:160px">"${selected_track.track}"</h5>
+                                        <img src="${selected_track.image}" alt="Track Image" style="height: 100%; width: 100%;">
+                                            <h5 class="card-title" id="selected_tracks">${selected_track.track}</h5>
                                             <p class="count">${selected_track.count}명이 듣고 있어요</p>
                                     </div>
                                     <div class="card-footer">
-                                        <p class="card-text">${selected_track.artist}</p>
+                                        <p class="card-text">${selected_track.artists}</p>
                                         <button class="likes">
                                         <i class="fa-solid fa-heart fa-3x"></i>
                                             <strong>0</strong>
