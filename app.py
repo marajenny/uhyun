@@ -36,6 +36,7 @@ def search_results():
 
     for track in track_search['tracks']['items']:
         track_results = track['name']
+        trackId_results = track['id']
         artist_results = [artist['name'] for artist in track['artists']]
         image_results = next(
             (image['url'] for image in track['album']['images'] if image['height'] == 640 and image['width'] == 640),
@@ -54,10 +55,13 @@ def search_results():
             'url': url_results,
             'date': date_input.strftime('%Y-%m-%d'),
             'hour': int(hour_input),
-            'timestamp': int(timestamp_input)}
+            'timestamp': int(timestamp_input),
+            'trackID': trackId_results}
 
-        tracks.append(track_result)
-        db.search_results.insert_one(track_result)
+        trackId_in_tracks = [t['trackID'] for t in tracks]
+        if trackId_results not in trackId_in_tracks:
+            tracks.append(track_result)
+            db.search_results.insert_one(track_result)
 
     return 'OK'
 
