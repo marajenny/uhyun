@@ -22,7 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!--스타일 시트 연결/커밋테스트-->
-    <link rel="stylesheet" href="./main_style.css">
+    <link rel="stylesheet" href="./static/css/main_style.css">
 
     <title>Playlist Bibimbap</title>
 
@@ -261,8 +261,8 @@
         }
 
         .songs_time .cards {
-            grid-template-columns: repeat(7, 1fr);
-            grid-template-rows: repeat(7, minmax(200px, auto));
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, minmax(200px, auto));
             width: 100%;
             min-height: 300px;
             display: flex;
@@ -451,18 +451,18 @@
                         let tracksList = `
                                 <div class="col-sd-4">
                                     <div class="card">
-                                        <img src="${track.image}" alt="Track Image" style="height:100%;">
+                                        <img id="image_result" src="${track.image}" alt="Track Image" style="height:100%;">
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
-                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
+                                                    <button type="button" id="select" class="btn btn-light" onclick="popup_show(); select_track(this)" ><i class="fa-solid fa-spoon" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
                                                     <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
-                                                        <i class="fa-brands fa-spotify fa-2x" ></i>
+                                                        <i class="fa-brands fa-spotify" ></i>
                                                     </button>
                                                     <audio id="play">
-                                                        <source src=${track.url} type="audio/mpeg">
+                                                        <source id="preview_result" src=${track.url} type="audio/mpeg">
                                                     </audio>
                                                 </div>
                                                 <p class="card-text" id="artists_result">${track.artists}</p>
@@ -477,18 +477,18 @@
                         let tracksList = `
                                 <div class="col-sd-4">
                                     <div class="card">
-                                        <img src="${track.image}" alt="Track Image" style="height:100%;">
+                                        <img id="image_result" src="${track.image}"  alt="Track Image" style="height:100%;">
                                             <div class="card-body">
                                                 <h5 class="card-title" id="track_result">${track.track}</h5>
                                                 <div class="position-absolute bottom-0 end-0">
                                                     <button type="button" id="select" class="btn btn-light" onclick="select_track(this)"><i class="fa-solid fa-spoon fa-2x" style="transform: scaleX(-1);"></i></button>
                                                 </div>
                                                 <div>
-                                                    <button onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
+                                                    <button  onclick="preview_play(this.nextElementSibling)" style="border:0; outline:0; background-color:transparent;">
                                                         <i class="fa-brands fa-spotify fa-2x" ></i>
                                                     </button>
                                                     <audio id="play">
-                                                        <source src=${track.url} type="audio/mpeg">
+                                                        <source id="preview_result" src=${track.url} type="audio/mpeg">
                                                     </audio>
                                                 </div>
                                                 <p class="card-text" id="artists_result">${track.artists}</p>
@@ -505,8 +505,6 @@
 
     </script>
     <script>
-<<<<<<<<< Temporary merge branch 1
-=========
         function popup_show() {
             document.getElementById('popup').style.display = 'block';
             setTimeout(function () {
@@ -515,7 +513,6 @@
             }
 
 
->>>>>>>>> Temporary merge branch 2
         function select_track(button) {
             let selected_track = $(button).closest(".card").find("#track_result").text();
             let selected_artists = $(button).closest(".card").find("#artists_result").text();
@@ -564,8 +561,6 @@
 
         $('#cards-box').prepend(selectedTrack)*/
 
-
->>>>>>>>> Temporary merge branch 2
     </script>
 
     <script>
@@ -611,9 +606,9 @@
                                 </div>
                             </div>`
 
-                        $('#cards-box').prepend(selected_trackList)
-                    })
-                },
+                        $('#cards-box').append(selected_trackList)
+                    });
+                }
             })
         }
 
@@ -724,7 +719,7 @@
         <h1>
             <b>오후 1시에는 이 노래들이 모이고 있어요!</b>
         </h1>
-        <div class="cards row row-cols-7" id="cards-box">
+        <div class="cards row row-cols-5" id="cards-box">
 
         </div>
     </div>
